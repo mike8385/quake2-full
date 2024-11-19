@@ -105,7 +105,7 @@ static void SP_CreateCoopSpots (edict_t *self)
 /*QUAKED info_player_start (1 0 0) (-16 -16 -24) (16 16 32)
 The normal starting point for a level.
 */
-void SP_info_player_start(edict_t *self)
+void SP_info_player_start(edict_t *self)	//Spawns player in game
 {
 	if (!coop->value)
 		return;
@@ -208,7 +208,7 @@ qboolean IsNeutral (edict_t *ent)
 	return false;
 }
 
-void ClientObituary (edict_t *self, edict_t *inflictor, edict_t *attacker)
+void ClientObituary (edict_t *self, edict_t *inflictor, edict_t *attacker)	//How they died
 {
 	int			mod;
 	char		*message;

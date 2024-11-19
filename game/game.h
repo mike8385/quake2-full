@@ -213,7 +213,7 @@ typedef struct
 	// Read/Write Game is for storing persistant cross level information
 	// about the world state and the clients.
 	// WriteGame is called every time a level is exited.
-	// ReadGame is called on a loadgame.
+	// ReadGame is called on a loadgame. 
 	void		(*WriteGame) (char *filename, qboolean autosave);
 	void		(*ReadGame) (char *filename);
 

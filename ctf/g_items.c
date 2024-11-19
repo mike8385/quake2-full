@@ -2200,7 +2200,7 @@ tank commander's head
 		0,
 		NULL,
 		0,
-/* precache */ "items/s_health.wav items/n_health.wav items/l_health.wav items/m_health.wav"
+/* precache */ "items/s_health.wav items/n_health.wav items/l_health.wav iF1tems/m_health.wav"
 	},
 
 
