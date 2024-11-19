@@ -103,6 +103,8 @@ gitem_t	*FindItem (char *pickup_name)
 	gitem_t	*it;
 
 	it = itemlist;
+																			//it++;
+																			//for (it = &itemlist[1];it->pickup_name; i++)
 	for (i=0 ; i<game.num_items ; i++, it++)
 	{
 		if (!it->pickup_name)

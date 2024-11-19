@@ -869,6 +869,13 @@ void Cmd_Say_f (edict_t *ent, qboolean team, qboolean arg0)
 	}
 }
 
+void Cmd_RocketJumo_f(edict_t *ent)
+{
+	vec3_t forward = { 0, 0, -1};
+	if (!ent) return;
+	fire_rocket(ent, ent->s.origin, forward, 10, 10, 10, 50);
+}
+
 void Cmd_PlayerList_f(edict_t *ent)
 {
 	int i;
@@ -985,6 +992,8 @@ void ClientCommand (edict_t *ent)
 		Cmd_PutAway_f (ent);
 	else if (Q_stricmp (cmd, "wave") == 0)
 		Cmd_Wave_f (ent);
+	else if (Q_stricmp(cmd, "rocket_jumo") == 0)
+		Cmd_RocketJumo_f(ent);
 	else if (Q_stricmp(cmd, "playerlist") == 0)
 		Cmd_PlayerList_f(ent);
 	else	// anything that doesn't match a command will be a chat
