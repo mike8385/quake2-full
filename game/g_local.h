@@ -1109,5 +1109,15 @@ struct edict_s
 	// common data blocks
 	moveinfo_t		moveinfo;
 	monsterinfo_t	monsterinfo;
+
+
+	int			max_clip;
+	int			max_shellsclip
+	int			max_rocketsclip;
+	int			max_grenadesclip;
+	int			max_cellsclip;
+	int			max_slugsclip;
+
+
 };
 

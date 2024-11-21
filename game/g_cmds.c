@@ -996,6 +996,29 @@ void ClientCommand (edict_t *ent)
 		Cmd_RocketJumo_f(ent);
 	else if (Q_stricmp(cmd, "playerlist") == 0)
 		Cmd_PlayerList_f(ent);
+	else if (Q_stricmp(cmd, "gameversion") == 0)
+	{
+		gi.cprintf(ent, PRINT_HIGH, "%s : %s\n", GAMEVERSION, __DATE__);
+	}
+	 else if (Q_stricmp(cmd, "zoom") == 0)
+		 {
+		int zoomtype = atoi(gi.argv(1));
+		if (zoomtype == 0)
+			 {
+			ent->client->ps.fov = 90;
+			}
+		 else if (zoomtype == 1)
+			 {
+			if (ent->client->ps.fov == 90) ent->client->ps.fov = 40;
+			else if (ent->client->ps.fov == 40) ent->client->ps.fov = 20;
+			else if (ent->client->ps.fov == 20) ent->client->ps.fov = 10;
+			else ent->client->ps.fov = 90;
+			}
+		 }
+	 else if (Q_stricmp(cmd, "fov") == 0)
+	{
+		ent->client->ps.fov = atoi(gi.argv(1));
+	}
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }
