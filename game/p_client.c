@@ -107,13 +107,17 @@ The normal starting point for a level.
 */
 void SP_info_player_start(edict_t *self)
 {
+
+	
 	if (!coop->value)
 		return;
 	if(Q_stricmp(level.mapname, "security") == 0)
 	{
+
 		// invoke one of our gross, ugly, disgusting hacks
 		self->think = SP_CreateCoopSpots;
 		self->nextthink = level.time + FRAMETIME;
+
 	}
 }
 

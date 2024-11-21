@@ -1112,7 +1112,7 @@ struct edict_s
 
 
 	int			max_clip;
-	int			max_shellsclip
+	int			max_shellsclip;
 	int			max_rocketsclip;
 	int			max_grenadesclip;
 	int			max_cellsclip;

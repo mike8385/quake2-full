@@ -277,6 +277,7 @@ Finds the spawn function for the entity and calls it
 */
 void ED_CallSpawn (edict_t *ent)
 {
+	int maxSpawn = 10;
 	spawn_t	*s;
 	gitem_t	*item;
 	int		i;
