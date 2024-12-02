@@ -26,7 +26,7 @@ typedef struct
 	void	(*spawn)(edict_t *ent);
 } spawn_t;
 
-
+void spawn_at(const char* classname, vec3_t position);
 void SP_item_health (edict_t *self);
 void SP_item_health_small (edict_t *self);
 void SP_item_health_large (edict_t *self);
@@ -143,6 +143,7 @@ void SP_monster_commander_body (edict_t *self);
 void SP_turret_breach (edict_t *self);
 void SP_turret_base (edict_t *self);
 void SP_turret_driver (edict_t *self);
+
 
 
 spawn_t	spawns[] = {
@@ -267,6 +268,37 @@ spawn_t	spawns[] = {
 
 	{NULL, NULL}
 };
+
+/*
+===============
+Spawn at pos
+Finds the spawn function for the entity and calls it
+===============
+*/
+void spawn_at(static char* classname, vec3_t position) {
+	gi.dprintf("Inside spawn_at\n");
+	
+	spawn_t* s;
+	edict_t* spawn = NULL;
+	if (!classname) return; //If no classname (NULL), return
+	spawn = G_Spawn();
+	if (!spawn)return;
+	VectorCopy(position, spawn->s.origin);
+	spawn->classname = classname;
+
+	for (s = spawns; s->name; s++) {
+
+		if (!strcmp(s->name, spawn->classname)) {
+			s->spawn(spawn);
+			return;
+		}
+	}
+	G_FreeEdict(spawn);
+
+	
+}
+
+
 
 /*
 ===============

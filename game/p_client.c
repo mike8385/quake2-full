@@ -107,6 +107,12 @@ The normal starting point for a level.
 */
 void SP_info_player_start(edict_t *self)
 {
+
+	//spawn_t *s;
+	//static char* entity = "monster_berserk";
+	//spawn_at(entity, self->s.origin);
+	//spawn_at(SP_monster_berserk, ent->s.origin);
+
 	if (!coop->value)
 		return;
 	if(Q_stricmp(level.mapname, "security") == 0)
@@ -1205,7 +1211,6 @@ void PutClientInServer (edict_t *ent)
 	}
 
 	client->ps.gunindex = gi.modelindex(client->pers.weapon->view_model);
-
 	// clear entity state values
 	ent->s.effects = 0;
 	ent->s.modelindex = 255;		// will use the skin specified model
