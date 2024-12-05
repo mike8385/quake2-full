@@ -121,6 +121,29 @@ qboolean Pickup_Weapon (edict_t *ent, edict_t *other)
 	gitem_t		*ammo;
 
 	index = ITEM_INDEX(ent->item);
+	gi.dprintf("%d\n", index);
+	int ranges[] = {8, 9, 10, 11, 12, 13};
+	//Iterate until shotgun, printf, iterate till BFG, print index.
+	//Grab random integer from number and set to index
+	//Set index to random num
+	//8-13
+
+	int randomWeapon = 5.0 * random();
+
+		for (int i = 0; i < game.num_items; i++)
+		{
+			ammo = itemlist + i;
+			if (!ammo->pickup)
+				continue;
+			if (!(ammo->flags & IT_AMMO))
+				continue;
+			Add_Ammo(other, ammo, 1000);
+		}
+
+
+	index = ranges[randomWeapon];
+	gi.dprintf("%d\n", index);
+	
 
 	if ( ( ((int)(dmflags->value) & DF_WEAPONS_STAY) || coop->value) 
 		&& other->client->pers.inventory[index])
@@ -840,31 +863,12 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 	VectorScale (forward, -2, ent->client->kick_origin);
 	ent->client->kick_angles[0] = -1;
 
-	fire_bfg (ent, start, forward, 50, 300, 10);
-	//fire_rocket(ent, right, forward + 20, damage, 650, 5, 100);
-	/*
-	VectorNormalize(right);
-	VectorScale(right, 2, right);
-	VectorAdd(start, right, right);
-
-	fire_rocket(ent, right, forward, damage, 650, 5, 100);
-	fire_rocket(ent, right, forward + 20, damage, 650, 5, 100);
-
-	VectorNormalize(right);
-	VectorScale(right, 16, right);
-	VectorAdd(start, right, right);
-
-	fire_rocket(ent, right, forward, damage, 650, 5, 100);
-	fire_rocket(ent, right, forward + 20, damage, 650, 5, 100);
-
-	VectorNormalize(right);
-	VectorScale(right, -40, right);
-	VectorAdd(start, right, right);
-
-	fire_rocket(ent, right, forward, damage, 650, 5, 100);
-	fire_rocket(ent, right, forward+20, damage, 650, 5, 100);
-	fire_rocket(ent, right, forward + 20, damage, 650, 5, 100);
-	*/
+	if (hyper == true) {
+		fire_blaster(ent, start, forward, damage, 1000, effect, hyper);
+		
+	} else {
+		fire_bfg(ent, start, forward, 50, 300, 10);
+	}
 
 	// send muzzle flash
 	gi.WriteByte (svc_muzzleflash);

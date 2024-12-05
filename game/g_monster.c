@@ -533,11 +533,11 @@ void monster_death_use (edict_t *self)
 
 qboolean monster_start (edict_t *self)
 {
-	//if (deathmatch->value)
-//	{
-	//	G_FreeEdict (self);
-		//return false;
-//	}
+	if (deathmatch->value)
+	{
+		G_FreeEdict (self);
+		return false;
+	}
 
 	if ((self->spawnflags & 4) && !(self->monsterinfo.aiflags & AI_GOOD_GUY))
 	{
@@ -552,7 +552,7 @@ qboolean monster_start (edict_t *self)
 	self->nextthink = level.time + FRAMETIME;
 	self->svflags |= SVF_MONSTER;
 	self->s.renderfx |= RF_FRAMELERP;
-	self->takedamage = DAMAGE_AIM;
+	self->takedamage = DAMAGE_YES;
 	self->air_finished = level.time + 12;
 	self->use = monster_use;
 	self->max_health = self->health;

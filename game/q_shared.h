@@ -441,7 +441,8 @@ typedef struct mapsurface_s  // used internally due to name len probs //ZOID
 	char		rname[32];
 } mapsurface_t;
 
-// a trace is returned when a box is swept through the world
+// a trace is returned when a box is swept through the 
+
 typedef struct
 {
 	qboolean	allsolid;	// if true, plane is not valid
