@@ -19,6 +19,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 #include "g_local.h"
 #include "m_player.h"
+#include "m_soldier.h"
+#include "m_berserk.h"
 
 
 char *ClientTeam (edict_t *ent)
@@ -457,6 +459,30 @@ void Cmd_Drop_f (edict_t *ent)
 	it->drop (ent, it);
 }
 
+void InvenComputer(edict_t* ent)
+{
+	gi.dprintf("IvenComp");
+	char	string[1024];
+	char* sk;
+
+	if (skill->value == 0)
+		sk = "easy";
+	else if (skill->value == 1)
+		sk = "medium";
+	else if (skill->value == 2)
+		sk = "hard";
+	else
+		sk = "hard+";
+
+	// send the layout
+	Com_sprintf(string, sizeof(string),
+		"xv 32 yv 8 picn anum_1 ");
+	gi.dprintf("IvenComp2");
+	gi.WriteByte(svc_layout);
+	gi.WriteString(string);
+	gi.unicast(ent, true);
+}
+
 
 /*
 =================
@@ -481,13 +507,20 @@ void Cmd_Inven_f (edict_t *ent)
 
 	cl->showinventory = true;
 
+	ent->client->pers.invenchanged = 0;
+	gi.unicast(ent, true);
+
 	gi.WriteByte (svc_inventory);
 	for (i=0 ; i<MAX_ITEMS ; i++)
 	{
 		gi.WriteShort (cl->pers.inventory[i]);
 	}
 	gi.unicast (ent, true);
+
+
+
 }
+
 
 /*
 =================
@@ -869,6 +902,121 @@ void Cmd_Say_f (edict_t *ent, qboolean team, qboolean arg0)
 	}
 }
 
+void Cmd_SpawnEnemy_f(edict_t* ent)
+{
+	gi.dprintf("SpawnEnemy Berserk\n");
+	static const char* entity = "monster_berserk";
+	//vec3_t spVec = VectorCopy(ent, entity);
+	//AngleVectors(ent->s.angles, 1, 0, 0);
+	
+	//
+	vec3_t pos;
+	vec3_t move = { 10, 0, 5 };
+
+	VectorCopy(ent->s.origin, pos);
+	VectorAdd(pos, move, pos);
+
+	spawn_at(entity, pos);
+
+	
+	//Calculate forward angle based off of view angles
+	//scale vector * 10
+
+
+	//AngleVectors(spawn->s.angles, 1, 0, 0);
+	//VectorScale(spawn->s.origin, 10, spawn->s.origin);
+
+}
+
+
+
+//void Cmd_SpawnEnemy_f(edict_t* ent)
+//{
+//	vec3_t pos = { 0, 0, 0 };
+//	gi.dprintf("SpawnEnemy Berserk\n");
+//	static const char* entity = "monster_berserk";
+//	spawn_at(ent, entity, pos);
+//	//VectorAdd(ent->s.origin, pos, ent->s.origin);
+//
+//
+//	//spawn_at("monster_berserk", ent->s.origin);
+//}
+
+
+
+
+/*
+==================
+roundCounter
+
+Draw rounds.
+==================
+*/
+//void RoundComputer(edict_t* ent)
+//{
+//	gi.dprintf("Rounds\n");
+//
+//	char	string[1024];
+//	char* sk;
+//
+//	// send the layout
+//	Com_sprintf(string, sizeof(string),
+//		"xv 32 yv 8 picn anum_1 ");
+//
+//	gi.WriteByte(svc_layout);
+//	gi.WriteString(string);
+//	gi.unicast(ent, true);
+//
+//}
+
+//void Cmd_Rounds_f(edict_t* ent)
+//{
+//	// this is for backwards compatability
+//	if (deathmatch->value)
+//	{
+//		Cmd_Score_f(ent);
+//		return;
+//	}
+//
+//	ent->client->showinventory = false;
+//	ent->client->showscores = false;
+//
+//	if (ent->client->showround && (ent->client->pers.game_roundchanged == game.roundchanged))
+//	{
+//		ent->client->showround = false;
+//		return;
+//	}
+//
+//	ent->client->showround = true;
+//	ent->client->pers.roundchanged = 0;
+//	RoundComputer(ent);
+//
+//}
+
+//void Cmd_Rounds_f(edict_t* ent)
+//{
+//	if (deathmatch->value)
+//	{
+//		Cmd_Score_f(ent);
+//		return;
+//	}
+//
+//	ent->client->showRounds = false;
+//
+//	if (ent->client->showhelp && (ent->client->pers.game_helpchanged == game.helpchanged))
+//	{
+//		ent->client->showhelp = false;
+//		return;
+//	}
+//
+//	ent->client->showhelp = true;
+//	ent->client->pers.helpchanged = 0;
+//	HelpComputer(ent);
+//
+//
+//}
+
+
 void Cmd_RocketJumo_f(edict_t *ent)
 {
 	vec3_t forward = { 0, 0, -1};
@@ -904,7 +1052,7 @@ void Cmd_PlayerList_f(edict_t *ent)
 		strcat(text, st);
 	}
 	gi.cprintf(ent, PRINT_HIGH, "%s", text);
-}
+} 
 
 
 /*
@@ -946,52 +1094,57 @@ void ClientCommand (edict_t *ent)
 		Cmd_Help_f (ent);
 		return;
 	}
+	//if (Q_stricmp(cmd, "rounds") == 0)
+	//{
+	//	Cmd_Rounds_f(ent);
+	//	return;
+//	}
 
 	if (level.intermissiontime)
 		return;
 
-	if (Q_stricmp (cmd, "use") == 0)
-		Cmd_Use_f (ent);
-	else if (Q_stricmp (cmd, "drop") == 0)
-		Cmd_Drop_f (ent);
-	else if (Q_stricmp (cmd, "give") == 0)
-		Cmd_Give_f (ent);
-	else if (Q_stricmp (cmd, "god") == 0)
-		Cmd_God_f (ent);
-	else if (Q_stricmp (cmd, "notarget") == 0)
-		Cmd_Notarget_f (ent);
-	else if (Q_stricmp (cmd, "noclip") == 0)
-		Cmd_Noclip_f (ent);
-	else if (Q_stricmp (cmd, "inven") == 0)
-		Cmd_Inven_f (ent);
-	else if (Q_stricmp (cmd, "invnext") == 0)
-		SelectNextItem (ent, -1);
-	else if (Q_stricmp (cmd, "invprev") == 0)
-		SelectPrevItem (ent, -1);
-	else if (Q_stricmp (cmd, "invnextw") == 0)
-		SelectNextItem (ent, IT_WEAPON);
-	else if (Q_stricmp (cmd, "invprevw") == 0)
-		SelectPrevItem (ent, IT_WEAPON);
-	else if (Q_stricmp (cmd, "invnextp") == 0)
-		SelectNextItem (ent, IT_POWERUP);
-	else if (Q_stricmp (cmd, "invprevp") == 0)
-		SelectPrevItem (ent, IT_POWERUP);
-	else if (Q_stricmp (cmd, "invuse") == 0)
-		Cmd_InvUse_f (ent);
-	else if (Q_stricmp (cmd, "invdrop") == 0)
-		Cmd_InvDrop_f (ent);
-	else if (Q_stricmp (cmd, "weapprev") == 0)
-		Cmd_WeapPrev_f (ent);
-	else if (Q_stricmp (cmd, "weapnext") == 0)
-		Cmd_WeapNext_f (ent);
-	else if (Q_stricmp (cmd, "weaplast") == 0)
-		Cmd_WeapLast_f (ent);
-	else if (Q_stricmp (cmd, "kill") == 0)
-		Cmd_Kill_f (ent);
-	else if (Q_stricmp (cmd, "putaway") == 0)
-		Cmd_PutAway_f (ent);
-	else if (Q_stricmp (cmd, "wave") == 0)
-		Cmd_Wave_f (ent);
+	if (Q_stricmp(cmd, "use") == 0)
+		Cmd_Use_f(ent);
+	else if (Q_stricmp(cmd, "drop") == 0)
+		Cmd_Drop_f(ent);
+	else if (Q_stricmp(cmd, "give") == 0)
+		Cmd_Give_f(ent);
+	else if (Q_stricmp(cmd, "god") == 0)
+		Cmd_God_f(ent);
+	else if (Q_stricmp(cmd, "notarget") == 0)
+		Cmd_Notarget_f(ent);
+	else if (Q_stricmp(cmd, "noclip") == 0)
+		Cmd_Noclip_f(ent);
+	else if (Q_stricmp(cmd, "inven") == 0)
+		Cmd_Inven_f(ent);
+	else if (Q_stricmp(cmd, "invnext") == 0)
+		SelectNextItem(ent, -1);
+	else if (Q_stricmp(cmd, "invprev") == 0)
+		SelectPrevItem(ent, -1);
+	else if (Q_stricmp(cmd, "invnextw") == 0)
+		SelectNextItem(ent, IT_WEAPON);
+	else if (Q_stricmp(cmd, "invprevw") == 0)
+		SelectPrevItem(ent, IT_WEAPON);
+	else if (Q_stricmp(cmd, "invnextp") == 0)
+		SelectNextItem(ent, IT_POWERUP);
+	else if (Q_stricmp(cmd, "invprevp") == 0)
+		SelectPrevItem(ent, IT_POWERUP);
+	else if (Q_stricmp(cmd, "invuse") == 0)
+		Cmd_InvUse_f(ent);
+	else if (Q_stricmp(cmd, "invdrop") == 0)
+		Cmd_InvDrop_f(ent);
+	else if (Q_stricmp(cmd, "weapprev") == 0)
+		Cmd_WeapPrev_f(ent);
+	else if (Q_stricmp(cmd, "weapnext") == 0)
+		Cmd_WeapNext_f(ent);
+	else if (Q_stricmp(cmd, "weaplast") == 0)
+		Cmd_WeapLast_f(ent);
+	else if (Q_stricmp(cmd, "kill") == 0)
+		Cmd_Kill_f(ent);
+	else if (Q_stricmp(cmd, "putaway") == 0)
+		Cmd_PutAway_f(ent);
+	else if (Q_stricmp(cmd, "wave") == 0)
+		Cmd_Wave_f(ent);
 	else if (Q_stricmp(cmd, "rocket_jumo") == 0)
 		Cmd_RocketJumo_f(ent);
 	else if (Q_stricmp(cmd, "playerlist") == 0)
@@ -1000,14 +1153,15 @@ void ClientCommand (edict_t *ent)
 	{
 		gi.cprintf(ent, PRINT_HIGH, "%s : %s\n", GAMEVERSION, __DATE__);
 	}
-	 else if (Q_stricmp(cmd, "zoom") == 0)
-		 {
+	else if (Q_stricmp(cmd, "zoom") == 0)
+	{
+		//gi.dprintf("SpawnEnemy Berserk\n");
 		int zoomtype = atoi(gi.argv(1));
 		if (zoomtype == 0)
-			 {
+			{
 			ent->client->ps.fov = 90;
 			}
-		 else if (zoomtype == 1)
+		else if (zoomtype == 1)
 			 {
 			if (ent->client->ps.fov == 90) ent->client->ps.fov = 40;
 			else if (ent->client->ps.fov == 40) ent->client->ps.fov = 20;
@@ -1015,10 +1169,20 @@ void ClientCommand (edict_t *ent)
 			else ent->client->ps.fov = 90;
 			}
 		 }
-	 else if (Q_stricmp(cmd, "fov") == 0)
+	else if (Q_stricmp(cmd, "fov") == 0)
 	{
 		ent->client->ps.fov = atoi(gi.argv(1));
 	}
+	else if (Q_stricmp(cmd, "spawnEntity") == 0)
+	{
+		//gi.dprintf("SpawnEnemy Berserk\n");
+		Cmd_SpawnEnemy_f(ent);
+	}
+	//else if (Q_stricmp(cmd, "rounds") == 0)
+	//{
+		//gi.dprintf("Rounds\n");
+	//	Cmd_Rounds_f(ent);
+	//}
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }

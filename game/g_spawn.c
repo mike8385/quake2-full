@@ -696,11 +696,21 @@ char *single_statusbar =
 "	pic	9 "
 "endif "
 
+
 //  help / weapon icon 
 "if 11 "
 "	xv	148 "
 "	pic	11 "
 "endif "
+
+"if 18 "
+"	yb	-24 "
+"   xr  -58"
+"	num	2	10 "
+"	xr	-24 "
+"	pic	18 "
+"endif "
+
 ;
 
 char *dm_statusbar =
@@ -980,5 +990,10 @@ void SP_worldspawn (edict_t *ent)
 
 	// 63 testing
 	gi.configstring(CS_LIGHTS+63, "a");
+
+	int roundcap = 2;
+
+	gi.dprintf("In g_spawn\n");
+
 }
 

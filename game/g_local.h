@@ -338,6 +338,9 @@ typedef struct
 	int			body_que;			// dead bodies
 
 	int			power_cubes;		// ugly necessity for coop
+
+	float		roundcap;
+
 } level_locals_t;
 
 
@@ -959,6 +962,10 @@ struct gclient_s
 
 	edict_t		*chase_target;		// player we are chasing
 	qboolean	update_chase;		// need to update chase info?
+
+	// Round Counter
+	int		zombieCounter;
+
 };
 
 
@@ -1110,13 +1117,22 @@ struct edict_s
 	moveinfo_t		moveinfo;
 	monsterinfo_t	monsterinfo;
 
+	//perks
+	qboolean hasjug;
+	float jug;
 
-	int			max_clip;
-	int			max_shellsclip
-	int			max_rocketsclip;
-	int			max_grenadesclip;
-	int			max_cellsclip;
-	int			max_slugsclip;
+	qboolean hasspeedcola;
+	float speedcola;
+
+	qboolean hasstam;
+	float stam;
+
+	qboolean hasphd;
+	float phd;
+
+	qboolean hasdoubletap;
+	float doubletap;
+
 
 
 };

@@ -115,6 +115,9 @@ void SP_info_player_start(edict_t *self)
 		self->think = SP_CreateCoopSpots;
 		self->nextthink = level.time + FRAMETIME;
 	}
+
+
+
 }
 
 /*QUAKED info_player_deathmatch (1 0 1) (-16 -16 -24) (16 16 32)
@@ -627,6 +630,8 @@ void InitClientPersistant (gclient_t *client)
 	client->pers.max_slugs		= 50;
 
 	client->pers.connected = true;
+	client->zombieCounter = 0;
+	gi.dprintf("Added counter to client in p_client\n");
 }
 
 
