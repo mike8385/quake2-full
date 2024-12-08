@@ -291,6 +291,9 @@ typedef struct
 	int			num_items;
 
 	qboolean	autosaved;
+
+	int			roundchanged;	// flash F1 icon if non 0, play sound
+
 } game_locals_t;
 
 
@@ -865,6 +868,11 @@ typedef struct
 	int			helpchanged;
 
 	qboolean	spectator;			// client is a spectator
+
+	int			invenchanged;
+	int			game_roundchanged;
+	int			roundchanged;
+
 } client_persistant_t;
 
 // client data that stays across deathmatch respawns
@@ -962,6 +970,11 @@ struct gclient_s
 
 	edict_t		*chase_target;		// player we are chasing
 	qboolean	update_chase;		// need to update chase info?
+
+	qboolean	showround;
+	qboolean	showroundicon;
+
+
 
 	// Round Counter
 	int		zombieCounter;
@@ -1117,23 +1130,15 @@ struct edict_s
 	moveinfo_t		moveinfo;
 	monsterinfo_t	monsterinfo;
 
-	//perks
-	qboolean hasjug;
-	float jug;
-
-	qboolean hasspeedcola;
-	float speedcola;
-
-	qboolean hasstam;
-	float stam;
-
-	qboolean hasphd;
-	float phd;
-
-	qboolean hasdoubletap;
-	float doubletap;
-
+	//Perks?
+	gitem_t *perks;
 
 
 };
 
+/*
+*@breif this writes to a file the msg
+*@param msg this is the input to be written to file
+*@note this is file operations, use cautiously
+*/
+void file_log(const char* msg);

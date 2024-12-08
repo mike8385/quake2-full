@@ -26,7 +26,8 @@ typedef struct
 	void	(*spawn)(edict_t *ent);
 } spawn_t;
 
-
+void SP_item_random(edict_t* self);
+void spawn_at(const char* classname, vec3_t position);
 void SP_item_health (edict_t *self);
 void SP_item_health_small (edict_t *self);
 void SP_item_health_large (edict_t *self);
@@ -56,7 +57,7 @@ void SP_func_killbox (edict_t *ent);
 
 void SP_trigger_always (edict_t *ent);
 void SP_trigger_once (edict_t *ent);
-void SP_trigger_multiple (edict_t *ent);
+void SP_trigger_multiple(edict_t* ent);
 void SP_trigger_relay (edict_t *ent);
 void SP_trigger_push (edict_t *ent);
 void SP_trigger_hurt (edict_t *ent);
@@ -143,6 +144,7 @@ void SP_monster_commander_body (edict_t *self);
 void SP_turret_breach (edict_t *self);
 void SP_turret_base (edict_t *self);
 void SP_turret_driver (edict_t *self);
+
 
 
 spawn_t	spawns[] = {
@@ -268,6 +270,95 @@ spawn_t	spawns[] = {
 	{NULL, NULL}
 };
 
+void SP_item_random(edict_t* self)
+{
+	//const char* classNames[] = { "item_weapon_shotgun" };
+	
+	//int numItems = sizeof();
+
+
+
+
+
+
+}
+
+
+/*
+===============
+Spawn at pos
+Finds the spawn function for the entity and calls it
+===============
+*/
+void spawn_at(static char* classname, vec3_t position) {
+	gi.dprintf("Inside spawn_at\n");
+	
+	spawn_t* s;
+	edict_t* spawn = NULL;
+	if (!classname) return; //If no classname (NULL), return
+	spawn = G_Spawn();
+	if (!spawn)return;
+	VectorCopy(position, spawn->s.origin);
+
+
+	//Calculate forward angle based off of view angles
+	//scale vector * 10
+
+
+	spawn->classname = classname;
+
+	for (s = spawns; s->name; s++) {
+
+		if (!strcmp(s->name, spawn->classname)) {
+			s->spawn(spawn);
+			gi.dprintf("SpawnEnemy Berserk\n");
+			return;
+		}
+	}
+	gi.dprintf("Free edict1\n");
+
+	G_FreeEdict(spawn);
+	gi.dprintf("Free edict2\n");
+	
+}
+/*
+void spawn_at(static char* classname, vec3_t position) {
+	gi.dprintf("Inside spawn_at\n");
+
+	spawn_t* s;
+	edict_t* spawn = NULL;
+	if (!classname) return; //If no classname (NULL), return
+	spawn = G_Spawn();
+	if (!spawn)return;
+
+	VectorCopy(position, spawn->s.origin);
+	AngleVectors(spawn->s.angles, 1, NULL, 0);
+	VectorScale(spawn->s.angles, 10, spawn->s.angles);
+
+
+
+	spawn->classname = classname;
+
+	for (s = spawns; s->name; s++) {
+
+		if (!strcmp(s->name, spawn->classname)) {
+			s->spawn(spawn);
+			gi.dprintf("SpawnEnemy Berserk\n");
+			return;
+		}
+		gi.dprintf("Inside item spawn\n");
+	}
+	gi.dprintf("Free edict1\n");
+
+	G_FreeEdict(spawn);
+	gi.dprintf("Free edict2\n");
+
+
+}
+*/
+
+
+
 /*
 ===============
 ED_CallSpawn
@@ -294,6 +385,19 @@ void ED_CallSpawn (edict_t *ent)
 			continue;
 		if (!strcmp(item->classname, ent->classname))
 		{	// found it
+			//If its a weapon, change weapon name to 
+			gi.dprintf("Hello");
+			if (item->flags & IT_WEAPON) {
+				const char* weaponNames[] = {"Shotgun", "Grenade Launcher", "Rocket Launcher",
+					"HyperBlaster", "Railgun", "BFG10K", "Machinegun"};
+				int randomWeapon = 6.0*random();
+				gi.dprintf("%d\n", randomWeapon);
+				gi.dprintf("%s\n", weaponNames[randomWeapon]);
+
+				//item->classname = weaponNames[randomWeapon];
+				ent->classname = weaponNames[randomWeapon];
+
+			}
 			SpawnItem (ent, item);
 			return;
 		}

@@ -336,6 +336,7 @@ void HelpComputer (edict_t *ent)
 }
 
 
+
 /*
 ==================
 Cmd_Help_f
@@ -343,12 +344,12 @@ Cmd_Help_f
 Display the current help message
 ==================
 */
-void Cmd_Help_f (edict_t *ent)
+void Cmd_Help_f(edict_t* ent)
 {
 	// this is for backwards compatability
 	if (deathmatch->value)
 	{
-		Cmd_Score_f (ent);
+		Cmd_Score_f(ent);
 		return;
 	}
 
@@ -363,8 +364,9 @@ void Cmd_Help_f (edict_t *ent)
 
 	ent->client->showhelp = true;
 	ent->client->pers.helpchanged = 0;
-	HelpComputer (ent);
+	HelpComputer(ent);
 }
+
 
 
 //=======================================================================

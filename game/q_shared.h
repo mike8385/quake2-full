@@ -441,7 +441,8 @@ typedef struct mapsurface_s  // used internally due to name len probs //ZOID
 	char		rname[32];
 } mapsurface_t;
 
-// a trace is returned when a box is swept through the world
+// a trace is returned when a box is swept through the 
+
 typedef struct
 {
 	qboolean	allsolid;	// if true, plane is not valid
@@ -548,7 +549,8 @@ typedef struct
 
 // entity_state_t->effects
 // Effects are things handled on the client side (lights, particles, frame animations)
-// that happen constantly on the given entity.
+// that happen constantly on the 
+// n entity.
 // An entity that has effects will be sent to the client
 // even if it has a zero index model.
 #define	EF_ROTATE			0x00000001		// rotate (bonus items)
