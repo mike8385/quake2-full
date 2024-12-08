@@ -755,6 +755,28 @@ void Drop_PowerArmor (edict_t *ent, gitem_t *item)
 	Drop_General (ent, item);
 }
 
+//============================================================================
+//Perks code
+
+qboolean Pickup_Jug(edict_t* ent, edict_t* other)
+{
+	if (!deathmatch->value) {
+		other->max_health += 100;
+		other->client->hasjug = true;
+		gi.dprintf("Picked up Jug\n");
+	}
+
+	if (other->health < other->max_health)
+		other->health = other->max_health;
+
+	if (!(ent->spawnflags & DROPPED_ITEM) && (deathmatch->value))
+		SetRespawn(ent, ent->item->quantity);
+
+	return true;
+}
+
+
+
 //======================================================================
 
 /*
@@ -2113,6 +2135,30 @@ tank commander's head
 		NULL,
 		0,
 /* precache */ "items/s_health.wav items/n_health.wav items/l_health.wav items/m_health.wav"
+	},
+
+	/*QUAKED item_adrenaline (.3 .3 1) (-16 -16 -16) (16 16 16)
+gives +1 to maximum health
+*/
+	{
+		"item_jug",
+		Pickup_Jug,
+		NULL,
+		NULL,
+		NULL,
+		"items/pkup.wav",
+		"models/items/adrenal/tris.md2", EF_ROTATE,
+		NULL,
+		/* icon */		"p_adrenaline",
+		/* pickup */	"Jug",
+		/* width */		2,
+				60,
+				NULL,
+				0,
+				0,
+				NULL,
+				0,
+				/* precache */ ""
 	},
 
 	// end of list marker

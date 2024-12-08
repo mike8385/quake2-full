@@ -815,6 +815,15 @@ char *single_statusbar =
 "	pic	18 "
 "endif "
 
+// Jug
+"if 21 "			// New. If STAT_TIMER4_ICON is not zero, then do
+"	yb	-96 "		// New
+"	xr	-58 "		// New
+"	num	2	21 "	// New. Display 2-digits with value from stat-array at index 21
+"	xr	-24 "		// New
+"	pic	21 "		// New. Display icon
+"endif "			// New
+
 ;
 
 char *dm_statusbar =

@@ -476,7 +476,6 @@ void G_SetStats (edict_t *ent)
 
 	
 	//Rounds
-	gi.dprintf("Messed with p_hud\n");
 	ent->client->ps.stats[STAT_ROUNDS_ICON] = gi.imageindex("num_1");
 	if (ent->client->zombieCounter > level.roundcap)
 	{
@@ -484,6 +483,13 @@ void G_SetStats (edict_t *ent)
 		//ent->client->ps.stats[STAT_HEALTH] = ent->health;
 
 	}
+
+	//Perks
+	if (ent->client->hasjug = true) {
+		ent->client->ps.stats[STAT_ROUNDS_ICON] = gi.imageindex(item->icon);
+	}
+
+
 	//
 	// selected item
 	//

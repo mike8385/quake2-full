@@ -1012,6 +1012,9 @@ typedef enum
 #define STAT_SPECTATOR			17
 #define STAT_ROUNDS_ICON		18
 #define STAT_ROUNDS				19
+#define STAT_JUG				20
+#define STAT_JUG_ICON			21
+
 
 
 #define	MAX_STATS				32
