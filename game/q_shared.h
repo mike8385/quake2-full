@@ -1014,6 +1014,9 @@ typedef enum
 #define STAT_ROUNDS				19
 #define STAT_JUG				20
 #define STAT_JUG_ICON			21
+#define STAT_STAM				22
+#define STAT_STAM_ICON			23
+
 
 
 

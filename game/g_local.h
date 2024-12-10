@@ -370,6 +370,7 @@ typedef struct
 	float		maxyaw;
 	float		minpitch;
 	float		maxpitch;
+
 } spawn_temp_t;
 
 
@@ -873,6 +874,8 @@ typedef struct
 	int			game_roundchanged;
 	int			roundchanged;
 
+	int			speedNum;
+
 } client_persistant_t;
 
 // client data that stays across deathmatch respawns
@@ -978,6 +981,23 @@ struct gclient_s
 
 	// Round Counter
 	int		zombieCounter;
+	int		roundcap;
+	int		roundNum;
+
+
+	//Perks
+	qboolean hasjug;
+
+	qboolean hasspeedcola;
+
+	qboolean hasstam;
+
+	qboolean hasphd;
+
+	qboolean hasdoubletap;
+
+	//Change speed
+	//int speedNum;
 
 };
 
@@ -1130,9 +1150,9 @@ struct edict_s
 	moveinfo_t		moveinfo;
 	monsterinfo_t	monsterinfo;
 
-	//Perks?
-	gitem_t *perks;
-
+	int ClassSpeed;
+	//int speedNum;
+	
 
 };
 

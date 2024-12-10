@@ -391,12 +391,14 @@ void berserk_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int dama
 			ThrowGib (self, "models/objects/gibs/sm_meat/tris.md2", damage, GIB_ORGANIC);
 		ThrowHead (self, "models/objects/gibs/head2/tris.md2", damage, GIB_ORGANIC);
 		self->deadflag = DEAD_DEAD;
+		gi.dprintf("In Kilsss\n");
 		attacker->client->zombieCounter = attacker->client->zombieCounter + 1;
 		return;
 	}
 
 	if (self->deadflag == DEAD_DEAD)
-		attacker->client->zombieCounter = attacker->client->zombieCounter + 1;
+		//gi.dprintf("In Berser3w33k\n");
+		//attacker->client->zombieCounter = attacker->client->zombieCounter + 1;
 		return;
 
 	gi.sound (self, CHAN_VOICE, sound_die, 1, ATTN_NORM, 0);
@@ -416,11 +418,11 @@ void berserk_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int dama
 */
 void SP_monster_berserk (edict_t *self)
 {
-	if (deathmatch->value)
-	{
-		G_FreeEdict (self);
-		return;
-	}
+	//if (deathmatch->value)
+//	{
+	//	G_FreeEdict (self);
+//	/	return;
+	//}
 
 	// pre-caches
 	sound_pain  = gi.soundindex ("berserk/berpain2.wav");

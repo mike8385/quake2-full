@@ -381,6 +381,7 @@ void G_SetStats (edict_t *ent)
 	gitem_t		*item;
 	int			index, cells;
 	int			power_armor_type;
+	char		buffer[50];
 
 	//
 	// health
@@ -476,18 +477,48 @@ void G_SetStats (edict_t *ent)
 
 	
 	//Rounds
-	ent->client->ps.stats[STAT_ROUNDS_ICON] = gi.imageindex("num_1");
-	if (ent->client->zombieCounter > level.roundcap)
+	sprintf(buffer, "num_%d", ent->client->roundNum);
+	ent->client->ps.stats[STAT_ROUNDS_ICON] = gi.imageindex(buffer);
+	if (ent->client->zombieCounter > ent->client->roundcap)
 	{
-		ent->client->ps.stats[STAT_ROUNDS_ICON] = gi.imageindex("num_2");
+		ent->client->roundNum++;
+		//sprintf(buffer, "num_%d", ent->client->roundNum);
+		ent->client->ps.stats[STAT_ROUNDS_ICON] = gi.imageindex(buffer);
 		//ent->client->ps.stats[STAT_HEALTH] = ent->health;
+		ent->client->roundcap = ent->client->roundcap + 2;
+		Cmd_SpawnEnemy_f(ent);
 
 	}
 
 	//Perks
-	if (ent->client->hasjug = true) {
-		ent->client->ps.stats[STAT_ROUNDS_ICON] = gi.imageindex(item->icon);
+	if (ent->client->hasjug == true) {
+		ent->client->ps.stats[STAT_JUG_ICON] = gi.imageindex("p_adrenaline");
+		ent->client->ps.stats[STAT_JUG] = 1;
 	}
+	else 
+	{
+		ent->client->ps.stats[STAT_JUG] = 0;		// New
+		ent->client->ps.stats[STAT_JUG_ICON] = 0;
+	}
+
+	if (ent->client->hasstam == true) {
+		ent->client->ps.stats[STAT_STAM_ICON] = gi.imageindex("p_quad");
+		ent->client->ps.stats[STAT_STAM] = 1;
+	}
+	else
+	{
+		ent->client->ps.stats[STAT_STAM] = 0;
+		ent->client->ps.stats[STAT_STAM_ICON] = 0;
+	}
+
+	/*if (ent->client->hasjug == true) {
+		ent->client->ps.stats[STAT_JUG_ICON] = gi.imageindex("p_quad");
+	}
+	else
+	{
+		ent->client->ps.stats[STAT_JUG_ICON] = 0;
+	}*/
+
 
 
 	//

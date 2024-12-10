@@ -310,6 +310,7 @@ void spawn_at(static char* classname, vec3_t position) {
 	for (s = spawns; s->name; s++) {
 
 		if (!strcmp(s->name, spawn->classname)) {
+
 			s->spawn(spawn);
 			gi.dprintf("SpawnEnemy Berserk\n");
 			return;
@@ -807,6 +808,7 @@ char *single_statusbar =
 "	pic	11 "
 "endif "
 
+//rounds
 "if 18 "
 "	yb	-24 "
 "   xr  -58"
@@ -823,6 +825,16 @@ char *single_statusbar =
 "	xr	-24 "		// New
 "	pic	21 "		// New. Display icon
 "endif "			// New
+
+
+// Stam				// New
+"if 23 "			// New. If STAT_TIMER3_ICON is not zero, then do
+"	yb	-72 "		// New
+"	xr	-58 "		// New
+"	num	2	23 "	// New. Display 2-digits with value from stat-array at index 19
+"	xr	-24 "		// New
+"	pic	23 "		// New. Display icon
+"endif "
 
 ;
 
@@ -903,6 +915,37 @@ char *dm_statusbar =
   "xv 64 "
   "stat_string 16 "
 "endif "
+
+//rounds
+"if 18 "
+"	yb	-24 "
+"   xr  -58"
+"	num	2	10 "
+"	xr	-24 "
+"	pic	18 "
+"endif "
+
+// Jug
+"if 21 "			// New. If STAT_TIMER4_ICON is not zero, then do
+"	yb	-96 "		// New
+"	xr	-58 "		// New
+"	num	2	21 "	// New. Display 2-digits with value from stat-array at index 21
+"	xr	-24 "		// New
+"	pic	21 "		// New. Display icon
+"endif "			// New
+
+
+// Stam				// New
+"if 23 "			// New. If STAT_TIMER3_ICON is not zero, then do
+"	yb	-72 "		// New
+"	xr	-58 "		// New
+"	num	2	23 "	// New. Display 2-digits with value from stat-array at index 19
+"	xr	-24 "		// New
+"	pic	23 "		// New. Display icon
+"endif "
+
+
+
 ;
 
 
@@ -1104,7 +1147,7 @@ void SP_worldspawn (edict_t *ent)
 	// 63 testing
 	gi.configstring(CS_LIGHTS+63, "a");
 
-	int roundcap = 2;
+	//roundcap = 5;
 
 	gi.dprintf("In g_spawn\n");
 

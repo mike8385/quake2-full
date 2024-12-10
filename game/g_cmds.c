@@ -910,21 +910,33 @@ void Cmd_SpawnEnemy_f(edict_t* ent)
 	//AngleVectors(ent->s.angles, 1, 0, 0);
 	
 	//
-	vec3_t pos;
-	vec3_t move = { 10, 0, 5 };
+	vec3_t offset;
+	vec3_t spawnPos;
+	vec3_t forward, right, up;
 
-	VectorCopy(ent->s.origin, pos);
-	VectorAdd(pos, move, pos);
+	AngleVectors(ent->s.angles, forward, right, up); //Get the view angles
 
-	spawn_at(entity, pos);
+	float scale = 65;
+	VectorScale(forward, scale, offset);
+	VectorAdd(ent->s.origin, offset, spawnPos);
+	spawn_at((char*)entity, spawnPos);
 
+	VectorScale(right, scale, offset);
+	VectorAdd(ent->s.origin, offset, spawnPos);
+	spawn_at((char*)entity, spawnPos);
+
+	/*VectorNormalize(right);
+	VectorScale(right, 50, right);
+	VectorAdd(ent->s.origin, right, right);
+	spawn_at((char*)entity, spawnPos);
+
+	VectorNormalize(right);
+	VectorScale(right, 50, right);
+	VectorAdd(ent->s.origin, right, right);
+	spawn_at((char*)entity, spawnPos);
+
+	*/
 	
-	//Calculate forward angle based off of view angles
-	//scale vector * 10
-
-
-	//AngleVectors(spawn->s.angles, 1, 0, 0);
-	//VectorScale(spawn->s.origin, 10, spawn->s.origin);
 
 }
 
@@ -1186,3 +1198,7 @@ void ClientCommand (edict_t *ent)
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }
+
+
+
+

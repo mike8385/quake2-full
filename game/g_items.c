@@ -760,11 +760,11 @@ void Drop_PowerArmor (edict_t *ent, gitem_t *item)
 
 qboolean Pickup_Jug(edict_t* ent, edict_t* other)
 {
-	if (!deathmatch->value) {
+	//if (!deathmatch->value) {
 		other->max_health += 100;
 		other->client->hasjug = true;
 		gi.dprintf("Picked up Jug\n");
-	}
+	//}
 
 	if (other->health < other->max_health)
 		other->health = other->max_health;
@@ -775,6 +775,22 @@ qboolean Pickup_Jug(edict_t* ent, edict_t* other)
 	return true;
 }
 
+qboolean Pickup_Stam(edict_t* ent, edict_t* other)
+{
+	//if (!deathmatch->value) {
+	other->client->hasstam = true;
+	other->client->pers.speedNum = 7;
+	gi.dprintf("Picked up Speed\n");
+	//}
+
+	//if (other->health < other->max_health)
+	//	other->health = other->max_health;
+
+	//if (!(ent->spawnflags & DROPPED_ITEM) && (deathmatch->value))
+	//	SetRespawn(ent, ent->item->quantity);
+//
+	return true;
+}
 
 
 //======================================================================
@@ -2151,6 +2167,30 @@ gives +1 to maximum health
 		NULL,
 		/* icon */		"p_adrenaline",
 		/* pickup */	"Jug",
+		/* width */		2,
+				60,
+				NULL,
+				0,
+				0,
+				NULL,
+				0,
+				/* precache */ ""
+	},
+
+	/*QUAKED item_adrenaline (.3 .3 1) (-16 -16 -16) (16 16 16)
+gives +1 to maximum health
+*/
+	{
+		"item_stam",
+		Pickup_Stam,
+		NULL,
+		NULL,
+		NULL,
+		"items/pkup.wav",
+		"models/items/adrenal/tris.md2", EF_ROTATE,
+		NULL,
+		/* icon */		"p_quad",
+		/* pickup */	"Stam",
 		/* width */		2,
 				60,
 				NULL,

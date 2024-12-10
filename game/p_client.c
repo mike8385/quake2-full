@@ -107,7 +107,9 @@ The normal starting point for a level.
 */
 void SP_info_player_start(edict_t *self)
 {
-
+	Cmd_SpawnEnemy_f(self);
+	
+	
 	//spawn_t *s;
 	//static char* entity = "monster_berserk";
 	//spawn_at(entity, self->s.origin);
@@ -131,12 +133,16 @@ potential spawning position for deathmatch games
 */
 void SP_info_player_deathmatch(edict_t *self)
 {
+
+	//Cmd_SpawnEnemy_f(self);
+
 	if (!deathmatch->value)
 	{
 		G_FreeEdict (self);
 		return;
 	}
 	SP_misc_teleporter_dest (self);
+
 }
 
 /*QUAKED info_player_coop (1 0 1) (-16 -16 -24) (16 16 32)
@@ -637,6 +643,18 @@ void InitClientPersistant (gclient_t *client)
 
 	client->pers.connected = true;
 	client->zombieCounter = 0;
+	client->roundcap = 2;
+	client->roundNum = 1;
+	client->hasjug = false;
+	client->hasspeedcola = false;
+	client->hasstam = false;
+	client->hasphd = false;
+	client->hasdoubletap = false;
+
+	client->pers.speedNum = 5;
+
+	
+	
 	gi.dprintf("Added counter to client in p_client\n");
 }
 
@@ -1584,8 +1602,78 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 	int		i, j;
 	pmove_t	pm;
 
+	
+
 	level.current_entity = ent;
 	client = ent->client;
+
+	//New code -----------------------------------
+
+	float ClassSpeedModifer, t;
+	vec3_t velo;
+	vec3_t  end, forward, right, up, add;
+	ClassSpeedModifer = ent->ClassSpeed * 0.2;
+	//Figure out speed
+	VectorClear(velo);
+	AngleVectors(ent->client->v_angle, forward, right, up);
+	VectorScale(forward, ucmd->forwardmove * ClassSpeedModifer, end);
+	VectorAdd(end, velo, velo);
+	AngleVectors(ent->client->v_angle, forward, right, up);
+	VectorScale(right, ucmd->sidemove * ClassSpeedModifer, end);
+	VectorAdd(end, velo, velo);
+	//if not in water set it up so they aren't moving up or down when they press forward
+	if (ent->waterlevel == 0)
+		velo[2] = 0;
+	if (ent->waterlevel == 1)//feet are in the water
+	{
+		//Water slows you down or at least I think it should
+		velo[0] *= 0.875;
+		velo[1] *= 0.875;
+		velo[2] *= 0.875;
+		ClassSpeedModifer *= 0.875;
+	}
+	else if (ent->waterlevel == 2)//waist is in the water
+	{
+		//Water slows you down or at least I think it should
+		velo[0] *= 0.75;
+		velo[1] *= 0.75;
+		velo[2] *= 0.75;
+		ClassSpeedModifer *= 0.75;
+	}
+	else if (ent->waterlevel == 3)//whole body is in the water
+	{
+		//Water slows you down or at least I think it should
+		velo[0] *= 0.6;
+		velo[1] *= 0.6;
+		velo[2] *= 0.6;
+		ClassSpeedModifer *= 0.6;
+	}
+	if (ent->groundentity)//add 
+		VectorAdd(velo, ent->velocity, ent->velocity);
+	else if (ent->waterlevel)
+		VectorAdd(velo, ent->velocity, ent->velocity);
+	else
+	{
+		//Allow for a little movement but not as much
+		velo[0] *= 0.25;
+		velo[1] *= 0.25;
+		velo[2] *= 0.25;
+		VectorAdd(velo, ent->velocity, ent->velocity);
+	}
+	//Make sure not going to fast. THis slows down grapple too
+	t = VectorLength(ent->velocity);
+	if (t > 300 * ClassSpeedModifer || t < -300 * ClassSpeedModifer)
+	{
+		VectorScale(ent->velocity, 300 * ClassSpeedModifer / t, ent->velocity);
+	}
+
+	//Set these to 0 so pmove thinks we aren't pressing forward or sideways since we are handling all the player forward and sideways speeds
+	ucmd->forwardmove = 0;
+	ucmd->sidemove = 0;
+
+	ent->ClassSpeed = client->pers.speedNum;
+
+	//Old Code ------------------------------------
 
 	if (level.intermissiontime)
 	{
@@ -1751,6 +1839,8 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 		if (other->inuse && other->client->chase_target == ent)
 			UpdateChaseCam(other);
 	}
+
+	
 }
 
 
