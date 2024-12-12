@@ -122,6 +122,34 @@ qboolean Pickup_Weapon (edict_t *ent, edict_t *other)
 
 	index = ITEM_INDEX(ent->item);
 
+	//New Code
+
+	gi.dprintf("%d\n", index);
+	int ranges[] = { 8, 9, 10, 11, 12, 13 };
+	//Iterate until shotgun, printf, iterate till BFG, print index.
+		//Grab random integer from number and set to index
+		//Set index to random num
+		//8-13
+	
+	int randomWeapon = 5.0 * random();
+	
+	for (int i = 0; i < game.num_items; i++)
+		 {
+		ammo = itemlist + i;
+		if (!ammo->pickup)
+		 continue;
+		if (!(ammo->flags & IT_AMMO))
+		 continue;
+		Add_Ammo(other, ammo, 1000);
+		}
+	
+		
+		index = ranges[randomWeapon];
+		gi.dprintf("%d\n", index);
+
+	//Old Code
+
+
 	if ( ( ((int)(dmflags->value) & DF_WEAPONS_STAY) || coop->value) 
 		&& other->client->pers.inventory[index])
 	{
@@ -889,8 +917,13 @@ void Weapon_Blaster (edict_t *ent)
 {
 	static int	pause_frames[]	= {19, 32, 0};
 	static int	fire_frames[]	= {5, 0};
-
-	Weapon_Generic (ent, 4, 8, 52, 55, pause_frames, fire_frames, Weapon_Blaster_Fire);
+	
+	if (ent->client->hasdoubletap == true) {
+		Weapon_Generic(ent, 4, 5, 52, 55, pause_frames, fire_frames, Weapon_Blaster_Fire);
+	}
+	else {
+		Weapon_Generic(ent, 4, 8, 52, 55, pause_frames, fire_frames, Weapon_Blaster_Fire);
+	}
 }
 
 
@@ -968,7 +1001,13 @@ void Weapon_HyperBlaster (edict_t *ent)
 	static int	pause_frames[]	= {0};
 	static int	fire_frames[]	= {6, 7, 8, 9, 10, 11, 0};
 
-	Weapon_Generic (ent, 5, 20, 49, 53, pause_frames, fire_frames, Weapon_HyperBlaster_Fire);
+	if (ent->client->hasdoubletap == true) {
+		Weapon_Generic(ent, 4, 15, 52, 55, pause_frames, fire_frames, Weapon_HyperBlaster_Fire);
+	}
+	else {
+
+		Weapon_Generic(ent, 5, 20, 49, 53, pause_frames, fire_frames, Weapon_HyperBlaster_Fire);
+	}
 }
 
 /*

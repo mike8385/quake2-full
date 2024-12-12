@@ -836,6 +836,24 @@ char *single_statusbar =
 "	pic	23 "		// New. Display icon
 "endif "
 
+// PHD				// New
+"if 24 "			// New. If STAT_TIMER3_ICON is not zero, then do
+"	yb	-120 "		// New
+"	xr	-58 "		// New
+"	num	2	24 "	// New. Display 2-digits with value from stat-array at index 19
+"	xr	-24 "		// New
+"	pic	24 "		// New. Display icon
+"endif "
+
+// PHD				// New
+"if 25 "			// New. If STAT_TIMER3_ICON is not zero, then do
+"	yb	-144 "		// New
+"	xr	-58 "		// New
+"	num	2	25 "	// New. Display 2-digits with value from stat-array at index 19
+"	xr	-24 "		// New
+"	pic	25 "		// New. Display icon
+"endif "
+
 ;
 
 char *dm_statusbar =
@@ -944,7 +962,23 @@ char *dm_statusbar =
 "	pic	23 "		// New. Display icon
 "endif "
 
+// PHD				// New
+"if 24 "			// New. If STAT_TIMER3_ICON is not zero, then do
+"	yb	-120 "		// New
+"	xr	-58 "		// New
+"	num	2	24 "	// New. Display 2-digits with value from stat-array at index 19
+"	xr	-24 "		// New
+"	pic	24 "		// New. Display icon
+"endif "
 
+// DoubleTap		// New
+"if 25 "			// New. If STAT_TIMER3_ICON is not zero, then do
+"	yb	-144 "		// New
+"	xr	-58 "		// New
+"	num	2	25 "	// New. Display 2-digits with value from stat-array at index 19
+"	xr	-24 "		// New
+"	pic	25 "		// New. Display icon
+"endif "
 
 ;
 

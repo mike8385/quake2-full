@@ -653,7 +653,7 @@ void InitClientPersistant (gclient_t *client)
 
 	client->pers.speedNum = 5;
 
-	
+	client->pers.credits = 500;
 	
 	gi.dprintf("Added counter to client in p_client\n");
 }
@@ -1672,6 +1672,7 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 	ucmd->sidemove = 0;
 
 	ent->ClassSpeed = client->pers.speedNum;
+	ent->playerCredits = client->pers.credits;
 
 	//Old Code ------------------------------------
 

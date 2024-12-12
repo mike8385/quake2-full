@@ -875,6 +875,7 @@ typedef struct
 	int			roundchanged;
 
 	int			speedNum;
+	int			credits;
 
 } client_persistant_t;
 
@@ -996,9 +997,8 @@ struct gclient_s
 
 	qboolean hasdoubletap;
 
-	//Change speed
-	//int speedNum;
-
+	//Points
+	//int credits;
 };
 
 
@@ -1151,7 +1151,7 @@ struct edict_s
 	monsterinfo_t	monsterinfo;
 
 	int ClassSpeed;
-	//int speedNum;
+	int playerCredits;
 	
 
 };

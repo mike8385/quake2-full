@@ -1016,7 +1016,8 @@ typedef enum
 #define STAT_JUG_ICON			21
 #define STAT_STAM				22
 #define STAT_STAM_ICON			23
-
+#define STAT_PHD_ICON			24
+#define STAT_DOUBLET_ICON		25
 
 
 

@@ -160,6 +160,8 @@ void Cmd_Give_f (edict_t *ent)
 	qboolean	give_all;
 	edict_t		*it_ent;
 
+
+
 	if (deathmatch->value && !sv_cheats->value)
 	{
 		gi.cprintf (ent, PRINT_HIGH, "You must run the server with '+set cheats 1' to enable this command.\n");
@@ -172,6 +174,16 @@ void Cmd_Give_f (edict_t *ent)
 		give_all = true;
 	else
 		give_all = false;
+
+	if (give_all || Q_stricmp(name, "maxCredits") == 0)
+	{
+		for (i = 0; i < game.num_items; i++)
+		{
+			ent->client->pers.credits = 10000;
+		}
+		if (!give_all)
+			return;
+	}
 
 	if (give_all || Q_stricmp(gi.argv(1), "health") == 0)
 	{
@@ -1036,6 +1048,136 @@ void Cmd_RocketJumo_f(edict_t *ent)
 	fire_rocket(ent, ent->s.origin, forward, 10, 10, 10, 50);
 }
 
+
+void Cmd_Credits_f(edict_t* ent)
+{
+	
+int playerCredits = ent->client->pers.credits;
+
+	gi.dprintf("%d",playerCredits);
+
+//}
+
+}
+
+void Cmd_Box_f(edict_t* ent)
+{
+	char* name;
+	gitem_t* it;
+	int			index;
+	int			i;
+	qboolean	give_all;
+	edict_t* it_ent;
+
+
+	int playerCredits = ent->client->pers.credits;
+	if (ent->client->pers.credits >= 500) {
+		ent->client->pers.credits = ent->client->pers.credits - 500;
+		
+		index = ITEM_INDEX(ent->item);
+
+		//New Code
+
+		gi.dprintf("%d\n", index);
+		int ranges[] = { 8, 9, 10, 11, 12, 13 };
+
+		int randomWeapon = 5.0 * random();
+
+		index = ranges[randomWeapon];
+		gi.dprintf("%d\n", index);
+
+		for (i = 0; i < game.num_items; i++)
+			{
+				it = itemlist + i;
+				if (!it->pickup)
+					continue;
+				if (!(it->flags & IT_AMMO))
+					continue;
+				Add_Ammo(ent, it, 1000);
+			}
+		
+
+		for (i = 0; i < 1; i++) {
+			it = itemlist + i;
+			if (!it->pickup)
+				continue;
+			if (!(it->flags & IT_WEAPON))
+				continue;
+			ent->client->pers.inventory[i] += 1;
+		}
+		ent->client->pers.inventory[index]++;
+
+	}
+	else {
+		gi.dprintf("Not Enough Credits\n");
+	}
+
+}
+
+void Cmd_Jug_f(edict_t* ent)
+{
+	int playerCredits = ent->client->pers.credits;
+	if (playerCredits >= 1000) {
+		playerCredits = playerCredits - 1000;
+		ent->client->hasjug = true;
+		ent->max_health += 100;
+		//other->client->hasjug = true;
+		gi.dprintf("Picked up Jug\n");
+		//}
+
+		if (ent->health < ent->max_health)
+			ent->health = ent->max_health;
+	}
+	else {
+		gi.dprintf("Not Enough Credits\n");
+	}
+
+}
+
+void Cmd_PHD_f(edict_t* ent)
+{
+	int playerCredits = ent->client->pers.credits;
+	if (playerCredits >= 700) {
+		ent->client->pers.credits = playerCredits - 700;
+		ent->client->hasphd = true;
+		gi.dprintf("Picked up PHD\n");
+	}
+	else {
+		gi.dprintf("Not Enough Credits\n");
+	}
+}
+
+void Cmd_Stam_f(edict_t* ent)
+{
+	int playerCredits = ent->client->pers.credits;
+	if (playerCredits >= 600) {
+		playerCredits = playerCredits - 600;
+		ent->client->hasstam = true;
+		//other->client->hasstam = true;
+		ent->client->pers.speedNum = 7;
+		gi.dprintf("Picked up Speed\n");
+	}
+	else {
+		gi.dprintf("Not Enough Credits\n");
+	}
+
+}
+
+void Cmd_DoubleTap_f(edict_t* ent)
+{
+	int playerCredits = ent->client->pers.credits;
+	if (playerCredits >= 800) {
+		playerCredits = playerCredits - 800;
+		ent->client->hasdoubletap = true;
+		gi.dprintf("Picked up DoubleTap\n");
+	}
+	else {
+		gi.dprintf("Not Enough Credits\n");
+	}
+}
+
+
+
 void Cmd_PlayerList_f(edict_t *ent)
 {
 	int i;
@@ -1190,15 +1332,44 @@ void ClientCommand (edict_t *ent)
 		//gi.dprintf("SpawnEnemy Berserk\n");
 		Cmd_SpawnEnemy_f(ent);
 	}
-	//else if (Q_stricmp(cmd, "rounds") == 0)
-	//{
+	else if (Q_stricmp(cmd, "Jug") == 0)
+	{
 		//gi.dprintf("Rounds\n");
-	//	Cmd_Rounds_f(ent);
-	//}
+		Cmd_Jug_f(ent);
+	}
+	else if (Q_stricmp(cmd, "PHD") == 0)
+	{
+		//gi.dprintf("Rounds\n");
+		Cmd_PHD_f(ent);
+	}
+	else if (Q_stricmp(cmd, "Stam") == 0)
+	{
+		//gi.dprintf("Rounds\n");
+		Cmd_Stam_f(ent);
+	}
+	else if (Q_stricmp(cmd, "DoubleTap") == 0)
+	{
+		//gi.dprintf("Rounds\n");
+		Cmd_DoubleTap_f(ent);
+	}
+	else if (Q_stricmp(cmd, "Box") == 0)
+	{
+		Cmd_Box_f(ent);
+	}
+	else if (Q_stricmp(cmd, "Credits") == 0)
+	{
+		Cmd_Credits_f(ent);
+	}
+	else if (Q_stricmp(cmd, "Shop") == 0)
+	{
+		gi.dprintf("SHOP:\n");
+		gi.dprintf("#####################:\n");
+		gi.dprintf("WHAT WOULD YOU LIKE TO BUY?:\n");
+		gi.dprintf("Box: 500, Jug: 1000, Stam: 600\nPHD: 700, DoubleTap: 800:\n");
+		gi.dprintf("Check credits with Credits\n");
+	}
+	
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }
-
-
-
 

@@ -792,6 +792,26 @@ qboolean Pickup_Stam(edict_t* ent, edict_t* other)
 	return true;
 }
 
+qboolean Pickup_PHD(edict_t* ent, edict_t* other)
+{
+	//if (!deathmatch->value) {
+	other->client->hasphd = true;
+
+	gi.dprintf("Picked up PHD\n");
+	
+	return true;
+}
+
+qboolean Pickup_DoubleTap(edict_t* ent, edict_t* other)
+{
+	//if (!deathmatch->value) {
+	other->client->hasdoubletap = true;
+
+	gi.dprintf("Picked up DoubleTap\n");
+
+	return true;
+}
+
 
 //======================================================================
 
@@ -2202,8 +2222,53 @@ gives +1 to maximum health
 	},
 
 	// end of list marker
-	{NULL}
+	{
+		"item_phd",
+		Pickup_PHD,
+		NULL,
+		NULL,
+		NULL,
+		"items/pkup.wav",
+		"models/items/adrenal/tris.md2", EF_ROTATE,
+		NULL,
+		/* icon */		"p_rebreather",
+		/* pickup */	"PHD",
+		/* width */		2,
+				60,
+				NULL,
+				0,
+				0,
+				NULL,
+				0,
+				/* precache */ ""
+	},
+
+		{
+		"item_doubletap",
+		Pickup_DoubleTap,
+		NULL,
+		NULL,
+		NULL,
+		"items/pkup.wav",
+		"models/items/adrenal/tris.md2", EF_ROTATE,
+		NULL,
+		/* icon */		"p_invulnerability",
+		/* pickup */	"DoubleTap",
+		/* width */		2,
+				60,
+				NULL,
+				0,
+				0,
+				NULL,
+				0,
+				/* precache */ ""
+		},
+
+	// end of list marker
+	{ NULL }
 };
+
+
 
 
 /*QUAKED item_health (.3 .3 1) (-16 -16 -16) (16 16 16)

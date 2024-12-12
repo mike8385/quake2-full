@@ -393,6 +393,8 @@ void berserk_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int dama
 		self->deadflag = DEAD_DEAD;
 		gi.dprintf("In Kilsss\n");
 		attacker->client->zombieCounter = attacker->client->zombieCounter + 1;
+		attacker->client->pers.credits += 100;
+
 		return;
 	}
 

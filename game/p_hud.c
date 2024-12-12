@@ -511,14 +511,21 @@ void G_SetStats (edict_t *ent)
 		ent->client->ps.stats[STAT_STAM_ICON] = 0;
 	}
 
-	/*if (ent->client->hasjug == true) {
-		ent->client->ps.stats[STAT_JUG_ICON] = gi.imageindex("p_quad");
+	if (ent->client->hasphd == true) {
+		ent->client->ps.stats[STAT_PHD_ICON] = gi.imageindex("p_rebreather");
 	}
 	else
 	{
-		ent->client->ps.stats[STAT_JUG_ICON] = 0;
-	}*/
+		ent->client->ps.stats[STAT_PHD_ICON] = 0;
+	}
 
+	if (ent->client->hasdoubletap == true) {
+		ent->client->ps.stats[STAT_DOUBLET_ICON] = gi.imageindex("p_invulnerability");
+	}
+	else
+	{
+		ent->client->ps.stats[STAT_DOUBLET_ICON] = 0;
+	}
 
 
 	//
