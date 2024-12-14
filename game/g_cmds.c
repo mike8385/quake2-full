@@ -1103,7 +1103,7 @@ void Cmd_Box_f(edict_t* ent)
 				continue;
 			if (!(it->flags & IT_WEAPON))
 				continue;
-			ent->client->pers.inventory[i] += 1;
+		`	ent->client->pers.inventory[i] += 1;
 		}
 		ent->client->pers.inventory[index]++;
 
