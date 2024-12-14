@@ -121,7 +121,8 @@ qboolean Pickup_Weapon (edict_t *ent, edict_t *other)
 	gitem_t		*ammo;
 
 	index = ITEM_INDEX(ent->item);
-
+	gi.dprintf("%d\n", index);
+	
 	//New Code
 
 	gi.dprintf("%d\n", index);
@@ -786,6 +787,7 @@ ROCKET
 
 void Weapon_RocketLauncher_Fire (edict_t *ent)
 {
+	static int clip = 0;
 	vec3_t	offset, start;
 	vec3_t	forward, right;
 	int		damage;
@@ -808,7 +810,14 @@ void Weapon_RocketLauncher_Fire (edict_t *ent)
 
 	VectorSet(offset, 8, 8, ent->viewheight-8);
 	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
-	fire_rocket (ent, start, forward, damage, 650, damage_radius, radius_damage);
+	if (ent->client->pers.inventory[ent->client->ammo_index] != 0) {
+		ent->client->pers.inventory[ent->client->ammo_index]--;
+		clip = 1;
+	}
+	if (clip == 1) {
+		fire_rocket(ent, start, forward, damage, 650, damage_radius, radius_damage);
+		clip = 0;
+	}
 
 	// send muzzle flash
 	gi.WriteByte (svc_muzzleflash);
@@ -821,7 +830,10 @@ void Weapon_RocketLauncher_Fire (edict_t *ent)
 	PlayerNoise(ent, start, PNOISE_WEAPON);
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
-		ent->client->pers.inventory[ent->client->ammo_index]--;
+		if (clip == 0 && ent->client->pers.inventory[ent->client->ammo_index] >= 1) {
+			ent->client->pers.inventory[ent->client->ammo_index]--;
+			clip = 1;
+		}// else if (clip == 0 && ent->client->pers.inventory[ent->client->ammo_index])
 }
 
 void Weapon_RocketLauncher (edict_t *ent)
@@ -859,6 +871,7 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 
 	if (hyper == true) {
 		fire_blaster(ent, start, forward, damage, 1000, effect, hyper);
+
 	}
 	else {
 		fire_bfg(ent, start, forward, 50, 300, 10);

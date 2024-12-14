@@ -949,6 +949,22 @@ void Cmd_SpawnEnemy_f(edict_t* ent)
 
 	*/
 	
+//=======
+//	vec3_t pos;
+//	vec3_t move = { 10, 0, 5 };
+//
+//	VectorCopy(ent->s.origin, pos);
+//	VectorAdd(pos, move, pos);
+//
+//	spawn_at(entity, pos);
+
+	
+	//Calculate forward angle based off of view angles
+	//scale vector * 10
+
+
+	//AngleVectors(spawn->s.angles, 1, 0, 0);
+	//VectorScale(spawn->s.origin, 10, spawn->s.origin);
 
 }
 
@@ -1103,7 +1119,7 @@ void Cmd_Box_f(edict_t* ent)
 				continue;
 			if (!(it->flags & IT_WEAPON))
 				continue;
-		`	ent->client->pers.inventory[i] += 1;
+			ent->client->pers.inventory[i] += 1;
 		}
 		ent->client->pers.inventory[index]++;
 

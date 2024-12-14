@@ -874,8 +874,10 @@ typedef struct
 	int			game_roundchanged;
 	int			roundchanged;
 
+
 	int			speedNum;
 	int			credits;
+
 
 } client_persistant_t;
 
@@ -999,6 +1001,7 @@ struct gclient_s
 
 	//Points
 	//int credits;
+
 };
 
 

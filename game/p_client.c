@@ -107,8 +107,8 @@ The normal starting point for a level.
 */
 void SP_info_player_start(edict_t *self)
 {
+
 	Cmd_SpawnEnemy_f(self);
-	
 	
 	//spawn_t *s;
 	//static char* entity = "monster_berserk";
