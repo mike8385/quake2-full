@@ -114,7 +114,10 @@ void SP_info_player_start(edict_t *self)
 	//spawn_at(entity, self->s.origin);
 	//spawn_at(SP_monster_berserk, ent->s.origin);
 
-
+	if (!deathmatch->value)
+	{
+		//Cmd_SpawnEnemy_f(self);
+	}
 
 
 }
@@ -641,10 +644,20 @@ void InitClientPersistant (gclient_t *client)
 	client->hasstam = false;
 	client->hasphd = false;
 	client->hasdoubletap = false;
+	client->hascherry = false;
+
 
 	client->pers.speedNum = 5;
 
 	client->pers.credits = 500;
+
+	client->pers.clip_bullets = 0;
+	client->pers.clip_shells = 0;
+	client->pers.clip_rockets = 0;
+	client->pers.clip_grenades = 0;
+	client->pers.clip_cells = 0;
+	client->pers.clip_slugs = 0;
+
 	
 	gi.dprintf("Added counter to client in p_client\n");
 }

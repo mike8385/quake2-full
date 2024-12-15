@@ -238,7 +238,8 @@ int		LittleLong (int l);
 float	BigFloat (float l);
 float	LittleFloat (float l);
 
-void	Swap_Init (void);
+void	
+_Init (void);
 char	*va(char *format, ...);
 
 //=============================================
@@ -1018,6 +1019,7 @@ typedef enum
 #define STAT_STAM_ICON			23
 #define STAT_PHD_ICON			24
 #define STAT_DOUBLET_ICON		25
+#define STAT_CHERRY_ICON		26
 
 
 
@@ -1210,3 +1212,16 @@ typedef struct
 extern int vidref_val;
 // PGM
 // ==================
+
+
+//Weapon clips
+#define BLASTERC		12
+#define SHOTGUNC		6
+#define SSHOTGUNC		4
+#define MACHINEGUNC		20
+#define CHAINGUNC		100
+#define GRENADELAUNCHC	3
+#define ROCKETLAUNCHC	1
+#define HYPERC			40
+#define RAILC			10
+#define BFGC			7

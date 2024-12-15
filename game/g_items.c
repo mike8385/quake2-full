@@ -812,6 +812,16 @@ qboolean Pickup_DoubleTap(edict_t* ent, edict_t* other)
 	return true;
 }
 
+qboolean Pickup_Cherry(edict_t* ent, edict_t* other)
+{
+	//if (!deathmatch->value) {
+	other->client->hascherry = true;
+	gi.dprintf("Picked up Cherry\n");
+	//}
+
+
+	return true;
+}
 
 //======================================================================
 
@@ -2254,6 +2264,27 @@ gives +1 to maximum health
 		NULL,
 		/* icon */		"p_invulnerability",
 		/* pickup */	"DoubleTap",
+		/* width */		2,
+				60,
+				NULL,
+				0,
+				0,
+				NULL,
+				0,
+				/* precache */ ""
+		},
+
+		{
+		"item_cherry",
+		Pickup_Cherry,
+		NULL,
+		NULL,
+		NULL,
+		"items/pkup.wav",
+		"models/items/adrenal/tris.md2", EF_ROTATE,
+		NULL,
+		/* icon */		"p_envirosuit",
+		/* pickup */	"Cherry",
 		/* width */		2,
 				60,
 				NULL,

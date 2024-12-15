@@ -878,6 +878,14 @@ typedef struct
 	int			speedNum;
 	int			credits;
 
+	// ammo capacities
+	int			clip_bullets;
+	int			clip_shells;
+	int			clip_rockets;
+	int			clip_grenades;
+	int			clip_cells;
+	int			clip_slugs;
+
 
 } client_persistant_t;
 
@@ -999,6 +1007,7 @@ struct gclient_s
 
 	qboolean hasdoubletap;
 
+	qboolean hascherry;
 	//Points
 	//int credits;
 

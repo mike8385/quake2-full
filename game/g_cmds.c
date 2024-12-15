@@ -937,34 +937,11 @@ void Cmd_SpawnEnemy_f(edict_t* ent)
 	VectorAdd(ent->s.origin, offset, spawnPos);
 	spawn_at((char*)entity, spawnPos);
 
-	/*VectorNormalize(right);
-	VectorScale(right, 50, right);
-	VectorAdd(ent->s.origin, right, right);
-	spawn_at((char*)entity, spawnPos);
-
-	VectorNormalize(right);
-	VectorScale(right, 50, right);
-	VectorAdd(ent->s.origin, right, right);
-	spawn_at((char*)entity, spawnPos);
-
-	*/
-	
-//=======
-//	vec3_t pos;
-//	vec3_t move = { 10, 0, 5 };
-//
-//	VectorCopy(ent->s.origin, pos);
-//	VectorAdd(pos, move, pos);
-//
-//	spawn_at(entity, pos);
 
 	
 	//Calculate forward angle based off of view angles
 	//scale vector * 10
 
-
-	//AngleVectors(spawn->s.angles, 1, 0, 0);
-	//VectorScale(spawn->s.origin, 10, spawn->s.origin);
 
 }
 
@@ -1192,6 +1169,19 @@ void Cmd_DoubleTap_f(edict_t* ent)
 	}
 }
 
+void Cmd_Cherry_f(edict_t* ent)
+{
+	int playerCredits = ent->client->pers.credits;
+	if (playerCredits >= 300) {
+		playerCredits = playerCredits - 300;
+		ent->client->hascherry = true;
+		gi.dprintf("Picked up Cherry\n");
+	}
+	else {
+		gi.dprintf("Not Enough Credits\n");
+	}
+}
+
 
 
 void Cmd_PlayerList_f(edict_t *ent)
@@ -1368,6 +1358,11 @@ void ClientCommand (edict_t *ent)
 		//gi.dprintf("Rounds\n");
 		Cmd_DoubleTap_f(ent);
 	}
+	else if (Q_stricmp(cmd, "Cherry") == 0)
+	{
+		//gi.dprintf("Rounds\n");
+		Cmd_Cherry_f(ent);
+	}
 	else if (Q_stricmp(cmd, "Box") == 0)
 	{
 		Cmd_Box_f(ent);
@@ -1381,7 +1376,7 @@ void ClientCommand (edict_t *ent)
 		gi.dprintf("SHOP:\n");
 		gi.dprintf("#####################:\n");
 		gi.dprintf("WHAT WOULD YOU LIKE TO BUY?:\n");
-		gi.dprintf("Box: 500, Jug: 1000, Stam: 600\nPHD: 700, DoubleTap: 800:\n");
+		gi.dprintf("Box: 500, Jug: 1000, Stam: 600\nPHD: 700, DoubleTap: 800, Cherry: 300\n");
 		gi.dprintf("Check credits with Credits\n");
 	}
 	

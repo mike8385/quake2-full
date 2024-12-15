@@ -303,6 +303,8 @@ void HelpComputer (edict_t *ent)
 {
 	char	string[1024];
 	char	*sk;
+	char* str = "Survive waves of enemies,\n Use 'Credits' to see credits,\n Use 'Shop' to use Credits";
+
 
 	if (skill->value == 0)
 		sk = "easy";
@@ -324,7 +326,7 @@ void HelpComputer (edict_t *ent)
 		"xv 50 yv 172 string2 \"%3i/%3i     %i/%i       %i/%i\" ", 
 		sk,
 		level.level_name,
-		game.helpmessage1,
+		str,
 		game.helpmessage2,
 		level.killed_monsters, level.total_monsters, 
 		level.found_goals, level.total_goals,
@@ -525,6 +527,14 @@ void G_SetStats (edict_t *ent)
 	else
 	{
 		ent->client->ps.stats[STAT_DOUBLET_ICON] = 0;
+	}
+
+	if (ent->client->hascherry == true) {
+		ent->client->ps.stats[STAT_CHERRY_ICON] = gi.imageindex("p_envirosuit");
+	}
+	else
+	{
+		ent->client->ps.stats[STAT_CHERRY_ICON] = 0;
 	}
 
 

@@ -126,7 +126,7 @@ qboolean Pickup_Weapon (edict_t *ent, edict_t *other)
 	//New Code
 
 	gi.dprintf("%d\n", index);
-	int ranges[] = { 8, 9, 10, 11, 12, 13 };
+	int ranges[] = { 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 };
 	//Iterate until shotgun, printf, iterate till BFG, print index.
 		//Grab random integer from number and set to index
 		//Set index to random num
@@ -253,6 +253,18 @@ void ChangeWeapon (edict_t *ent)
 			ent->client->anim_end = FRAME_pain304;
 			
 	}
+
+	if (ent->client->hascherry == true) {
+		if (ent->client->hasphd == true) {
+			weapon_grenade_fire(ent, false);
+		}
+		else {
+			ent->takedamage == false;
+			weapon_grenade_fire(ent, false);
+			ent->takedamage == true;
+		}
+	}
+
 }
 
 /*
@@ -774,7 +786,12 @@ void Weapon_GrenadeLauncher (edict_t *ent)
 	static int	pause_frames[]	= {34, 51, 59, 0};
 	static int	fire_frames[]	= {6, 0};
 
-	Weapon_Generic (ent, 5, 16, 59, 64, pause_frames, fire_frames, weapon_grenadelauncher_fire);
+	if (ent->client->hasdoubletap == true) {
+		Weapon_Generic(ent, 5, 11, 59, 64, pause_frames, fire_frames, weapon_grenadelauncher_fire);
+	}
+	else {
+		Weapon_Generic(ent, 5, 16, 59, 64, pause_frames, fire_frames, weapon_grenadelauncher_fire);
+	}
 }
 
 /*
@@ -787,7 +804,8 @@ ROCKET
 
 void Weapon_RocketLauncher_Fire (edict_t *ent)
 {
-	static int clip = 0;
+	static int rocketclip = 0;
+	rocketclip = ent->client->pers.clip_rockets;
 	vec3_t	offset, start;
 	vec3_t	forward, right;
 	int		damage;
@@ -810,29 +828,33 @@ void Weapon_RocketLauncher_Fire (edict_t *ent)
 
 	VectorSet(offset, 8, 8, ent->viewheight-8);
 	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
-	if (ent->client->pers.inventory[ent->client->ammo_index] != 0) {
+	/*if (ent->client->pers.inventory[ent->client->ammo_index] != 0) {
 		ent->client->pers.inventory[ent->client->ammo_index]--;
-		clip = 1;
-	}
-	if (clip == 1) {
+		ent->client->pers.clip_rockets = 1;
+	}*/
+	//if (rocketclip > 0) {
+		//rocketclip--;
 		fire_rocket(ent, start, forward, damage, 650, damage_radius, radius_damage);
-		clip = 0;
-	}
+		
 
-	// send muzzle flash
-	gi.WriteByte (svc_muzzleflash);
-	gi.WriteShort (ent-g_edicts);
-	gi.WriteByte (MZ_ROCKET | is_silenced);
-	gi.multicast (ent->s.origin, MULTICAST_PVS);
+		// send muzzle flash
+		gi.WriteByte(svc_muzzleflash);
+		gi.WriteShort(ent - g_edicts);
+		gi.WriteByte(MZ_ROCKET | is_silenced);
+		gi.multicast(ent->s.origin, MULTICAST_PVS);
+		ent->client->ps.gunframe++;
 
-	ent->client->ps.gunframe++;
 
-	PlayerNoise(ent, start, PNOISE_WEAPON);
+		PlayerNoise(ent, start, PNOISE_WEAPON);
+	//}
+	//else {
+	//	gi.cprintf(ent, PRINT_HIGH, "Reload required!\n"); // Notify player
+	//}
 
-	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
-		if (clip == 0 && ent->client->pers.inventory[ent->client->ammo_index] >= 1) {
+	//if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
+		if (ent->client->pers.inventory[ent->client->ammo_index] >= 1) {
 			ent->client->pers.inventory[ent->client->ammo_index]--;
-			clip = 1;
+			//clip = 1;
 		}// else if (clip == 0 && ent->client->pers.inventory[ent->client->ammo_index])
 }
 
@@ -841,7 +863,11 @@ void Weapon_RocketLauncher (edict_t *ent)
 	static int	pause_frames[]	= {25, 33, 42, 50, 0};
 	static int	fire_frames[]	= {5, 0};
 
-	Weapon_Generic (ent, 4, 12, 50, 54, pause_frames, fire_frames, Weapon_RocketLauncher_Fire);
+	if (ent->client->hasdoubletap == true) {
+		Weapon_Generic(ent, 4, 7, 50, 54, pause_frames, fire_frames, Weapon_RocketLauncher_Fire);
+	}else {
+		Weapon_Generic(ent, 4, 12, 50, 54, pause_frames, fire_frames, Weapon_RocketLauncher_Fire);
+	}
 }
 
 
@@ -1015,7 +1041,7 @@ void Weapon_HyperBlaster (edict_t *ent)
 	static int	fire_frames[]	= {6, 7, 8, 9, 10, 11, 0};
 
 	if (ent->client->hasdoubletap == true) {
-		Weapon_Generic(ent, 4, 15, 52, 55, pause_frames, fire_frames, Weapon_HyperBlaster_Fire);
+		Weapon_Generic(ent, 4, 13, 52, 55, pause_frames, fire_frames, Weapon_HyperBlaster_Fire);
 	}
 	else {
 
@@ -1120,9 +1146,14 @@ void Machinegun_Fire (edict_t *ent)
 void Weapon_Machinegun (edict_t *ent)
 {
 	static int	pause_frames[]	= {23, 45, 0};
-	static int	fire_frames[]	= {4, 5, 0};
+	static int	fire_frames[]	= {4, 5, 6, 8, 0};
 
-	Weapon_Generic (ent, 3, 5, 45, 49, pause_frames, fire_frames, Machinegun_Fire);
+	if (ent->client->hasdoubletap == true) {
+		Weapon_Generic(ent, 3, 5, 45, 49, pause_frames, fire_frames, Machinegun_Fire);
+	}
+	else {
+		Weapon_Generic(ent, 3, 8, 45, 49, pause_frames, fire_frames, Machinegun_Fire);
+	}
 }
 
 void Chaingun_Fire (edict_t *ent)
@@ -1250,7 +1281,12 @@ void Weapon_Chaingun (edict_t *ent)
 	static int	pause_frames[]	= {38, 43, 51, 61, 0};
 	static int	fire_frames[]	= {5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 0};
 
-	Weapon_Generic (ent, 4, 31, 61, 64, pause_frames, fire_frames, Chaingun_Fire);
+	if (ent->client->hasdoubletap == true) {
+		Weapon_Generic(ent, 4, 25, 61, 64, pause_frames, fire_frames, Chaingun_Fire);
+	}
+	else {
+		Weapon_Generic(ent, 4, 31, 61, 64, pause_frames, fire_frames, Chaingun_Fire);
+	}
 }
 
 
@@ -1312,8 +1348,12 @@ void Weapon_Shotgun (edict_t *ent)
 {
 	static int	pause_frames[]	= {22, 28, 34, 0};
 	static int	fire_frames[]	= {8, 9, 0};
-
-	Weapon_Generic (ent, 7, 18, 36, 39, pause_frames, fire_frames, weapon_shotgun_fire);
+	if (ent->client->hasdoubletap == true) {
+		Weapon_Generic(ent, 7, 10, 36, 39, pause_frames, fire_frames, weapon_shotgun_fire);
+	}
+	else {
+		Weapon_Generic(ent, 7, 18, 36, 39, pause_frames, fire_frames, weapon_shotgun_fire);
+	}
 }
 
 
@@ -1366,8 +1406,13 @@ void Weapon_SuperShotgun (edict_t *ent)
 {
 	static int	pause_frames[]	= {29, 42, 57, 0};
 	static int	fire_frames[]	= {7, 0};
-
-	Weapon_Generic (ent, 6, 17, 57, 61, pause_frames, fire_frames, weapon_supershotgun_fire);
+	
+	if (ent->client->hasdoubletap == true) {
+		Weapon_Generic(ent, 6, 10, 57, 61, pause_frames, fire_frames, weapon_supershotgun_fire);
+	}
+	else {
+		Weapon_Generic(ent, 6, 17, 57, 61, pause_frames, fire_frames, weapon_supershotgun_fire);
+	}
 }
 
 
@@ -1433,7 +1478,12 @@ void Weapon_Railgun (edict_t *ent)
 	static int	pause_frames[]	= {56, 0};
 	static int	fire_frames[]	= {4, 0};
 
-	Weapon_Generic (ent, 3, 18, 56, 61, pause_frames, fire_frames, weapon_railgun_fire);
+	if (ent->client->hasdoubletap == true) {
+		Weapon_Generic(ent, 3, 13, 56, 61, pause_frames, fire_frames, weapon_railgun_fire);
+	}
+	else {
+		Weapon_Generic(ent, 3, 18, 56, 61, pause_frames, fire_frames, weapon_railgun_fire);
+	}
 }
 
 
@@ -1513,3 +1563,73 @@ void Weapon_BFG (edict_t *ent)
 
 
 //======================================================================
+/*
+
+void Weapon_RocketLauncher_Fire (edict_t *ent)
+{
+	static int clip = ROCKETLAUNCHC;
+	vec3_t	offset, start;
+	vec3_t	forward, right;
+	int		damage;
+	float	damage_radius;
+	int		radius_damage;
+
+	damage = 100 + (int)(random() * 20.0);
+	radius_damage = 120;
+	damage_radius = 120;
+	if (is_quad)
+	{
+		damage *= 4;
+		radius_damage *= 4;
+	}
+
+	AngleVectors (ent->client->v_angle, forward, right, NULL);
+
+	VectorScale (forward, -2, ent->client->kick_origin);
+	ent->client->kick_angles[0] = -1;
+
+	VectorSet(offset, 8, 8, ent->viewheight-8);
+	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
+	if (clip > 0) {
+		clip--;
+		fire_rocket(ent, start, forward, damage, 650, damage_radius, radius_damage);
+
+		// send muzzle flash
+		gi.WriteByte(svc_muzzleflash);
+		gi.WriteShort(ent - g_edicts);
+		gi.WriteByte(MZ_ROCKET | is_silenced);
+		gi.multicast(ent->s.origin, MULTICAST_PVS);
+
+		PlayerNoise(ent, start, PNOISE_WEAPON);
+	}
+	else {
+		gi.cprintf(ent, PRINT_HIGH, "Reload required!\n"); // Notify player
+	}
+	ent->client->ps.gunframe++;
+
+	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
+		if (clip == 0 && ent->client->pers.inventory[ent->client->ammo_index] >= 1) {
+			ent->client->pers.inventory[ent->client->ammo_index]--;
+			clip = 1;
+		}// else if (clip == 0 && ent->client->pers.inventory[ent->client->ammo_index])
+}
+
+void Weapon_R_Reload(edict_t* ent)
+{
+	int ammo_needed = ROCKETLAUNCHC - clip;
+
+	if (ent->client->pers.inventory[ent->client->ammo_index] >= ammo_needed)
+	{
+		ent->client->pers.inventory[ent->client->ammo_index] -= ammo_needed;
+		clip = ROCKET_CLIP_SIZE;
+	}
+	else
+	{
+		clip += ent->client->pers.inventory[ent->client->ammo_index];
+		ent->client->pers.inventory[ent->client->ammo_index] = 0;
+	}
+
+	gi.cprintf(ent, PRINT_HIGH, "Reloaded. %d rockets in clip.\n", clip);
+}
+
+*/
