@@ -26,12 +26,14 @@ Deliverables/New Features:
   -You can check your current points with "Credits"
 3.)  5 Perks:
   -Jug: Gives total of 200 health
-  -Stam: Changes movement speed
+  -Stam: Changes movement speed (Taken from here: https://web.archive.org/web/20051227025733/http://www.planetquake.com/qdevels/quake2/1_5_98.html)
   -PHD: Negates all splash damage
   -DoubleTap: Increases weapons firerate
   -Cherry: Explosion whenever you swap weapons.
+  -Learned how to do the UI here: (https://web.archive.org/web/20051227033042/http://www.planetquake.com/qdevels/quake2/25_12_97g.html)
 4.) Change all weapons:
-  -For the blaster I made it the raygun from COD zombies. All the other guns were essentially 
+  -For the blaster I made it the raygun from COD zombies. All the other guns were essentially
+  -I also added a zooming feature taken from planetquake (https://web.archive.org/web/20051227031811/http://www.planetquake.com/qdevels/quake2/28_1_98a.html)
 the same since they function the same way as in call of duty. I also removed the BFG from the gun pool.
 5.) Gun Upgrades:
   -DoubleTap increases fire rate, changing how fast and damaging each weapon does.
