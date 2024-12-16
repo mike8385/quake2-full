@@ -15,7 +15,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=2879229630
 Deliverables/New Features:
 1.) Monsters spawning in waves:
   -Every few kills the rounds go up and the monsters spawn back.
-  -Pressing "x" force spawns enemies if your game bugs and they diont spawn.
+  -Pressing "x" force spawns enemies if your game bugs and they didn't spawn.
 2.) Shop to buy weapons:
   -You start with 500 Credits
   -Every kill grants you 100 more.
@@ -31,4 +31,4 @@ Deliverables/New Features:
 4.) Change all weapons:
   -For the blaster I made it the raygun from COD zombies. All the other guns were essentially the same since they function the same way as in call of duty.
 5.) Gun Upgrades:
-  -DoubleTap increases firerate, and changes how fast and damage each weapon does.
+  -DoubleTap increases fire rate, changing how fast and damaging each weapon does.
