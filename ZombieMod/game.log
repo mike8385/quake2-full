@@ -1,0 +1,221 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(516,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  g_cmds.c
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(74,9): warning C4005: 'FRAME_pain101': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(78,9):
+      see previous definition of 'FRAME_pain101'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(75,9): warning C4005: 'FRAME_pain102': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(79,9):
+      see previous definition of 'FRAME_pain102'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(76,9): warning C4005: 'FRAME_pain103': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(80,9):
+      see previous definition of 'FRAME_pain103'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(77,9): warning C4005: 'FRAME_pain104': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(81,9):
+      see previous definition of 'FRAME_pain104'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(79,9): warning C4005: 'FRAME_pain201': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(82,9):
+      see previous definition of 'FRAME_pain201'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(80,9): warning C4005: 'FRAME_pain202': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(83,9):
+      see previous definition of 'FRAME_pain202'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(81,9): warning C4005: 'FRAME_pain203': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(84,9):
+      see previous definition of 'FRAME_pain203'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(82,9): warning C4005: 'FRAME_pain204': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(85,9):
+      see previous definition of 'FRAME_pain204'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(296,9): warning C4005: 'FRAME_death101': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(202,9):
+      see previous definition of 'FRAME_death101'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(297,9): warning C4005: 'FRAME_death102': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(203,9):
+      see previous definition of 'FRAME_death102'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(298,9): warning C4005: 'FRAME_death103': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(204,9):
+      see previous definition of 'FRAME_death103'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(299,9): warning C4005: 'FRAME_death104': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(205,9):
+      see previous definition of 'FRAME_death104'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(300,9): warning C4005: 'FRAME_death105': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(206,9):
+      see previous definition of 'FRAME_death105'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(301,9): warning C4005: 'FRAME_death106': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(207,9):
+      see previous definition of 'FRAME_death106'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(332,9): warning C4005: 'FRAME_death201': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(208,9):
+      see previous definition of 'FRAME_death201'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(333,9): warning C4005: 'FRAME_death202': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(209,9):
+      see previous definition of 'FRAME_death202'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(334,9): warning C4005: 'FRAME_death203': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(210,9):
+      see previous definition of 'FRAME_death203'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(335,9): warning C4005: 'FRAME_death204': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(211,9):
+      see previous definition of 'FRAME_death204'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(336,9): warning C4005: 'FRAME_death205': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(212,9):
+      see previous definition of 'FRAME_death205'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(337,9): warning C4005: 'FRAME_death206': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(213,9):
+      see previous definition of 'FRAME_death206'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(367,9): warning C4005: 'FRAME_death301': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(214,9):
+      see previous definition of 'FRAME_death301'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(368,9): warning C4005: 'FRAME_death302': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(215,9):
+      see previous definition of 'FRAME_death302'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(369,9): warning C4005: 'FRAME_death303': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(216,9):
+      see previous definition of 'FRAME_death303'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(370,9): warning C4005: 'FRAME_death304': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(217,9):
+      see previous definition of 'FRAME_death304'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(371,9): warning C4005: 'FRAME_death305': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(218,9):
+      see previous definition of 'FRAME_death305'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(372,9): warning C4005: 'FRAME_death306': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(219,9):
+      see previous definition of 'FRAME_death306'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(373,9): warning C4005: 'FRAME_death307': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(220,9):
+      see previous definition of 'FRAME_death307'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(374,9): warning C4005: 'FRAME_death308': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(221,9):
+      see previous definition of 'FRAME_death308'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(500,9): warning C4005: 'MODEL_SCALE': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(223,9):
+      see previous definition of 'MODEL_SCALE'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_berserk.h(60,9): warning C4005: 'FRAME_run1': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(64,9):
+      see previous definition of 'FRAME_run1'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_berserk.h(61,9): warning C4005: 'FRAME_run2': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(65,9):
+      see previous definition of 'FRAME_run2'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_berserk.h(62,9): warning C4005: 'FRAME_run3': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(66,9):
+      see previous definition of 'FRAME_run3'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_berserk.h(63,9): warning C4005: 'FRAME_run4': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(67,9):
+      see previous definition of 'FRAME_run4'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_berserk.h(64,9): warning C4005: 'FRAME_run5': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(68,9):
+      see previous definition of 'FRAME_run5'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_berserk.h(65,9): warning C4005: 'FRAME_run6': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_player.h(69,9):
+      see previous definition of 'FRAME_run6'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\m_berserk.h(269,9): warning C4005: 'MODEL_SCALE': macro redefinition
+  (compiling source file 'g_cmds.c')
+      C:\Users\mrbar\Git Folders\quake2-full\game\m_soldier.h(500,9):
+      see previous definition of 'MODEL_SCALE'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\g_cmds.c(36,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\mrbar\Git Folders\quake2-full\game\g_cmds.c(59,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\mrbar\Git Folders\quake2-full\game\g_cmds.c(60,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\mrbar\Git Folders\quake2-full\game\g_cmds.c(767,4): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\mrbar\Git Folders\quake2-full\game\g_cmds.c(770,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\mrbar\Git Folders\quake2-full\game\g_cmds.c(853,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\mrbar\Git Folders\quake2-full\game\g_cmds.c(854,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\mrbar\Git Folders\quake2-full\game\g_cmds.c(855,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\mrbar\Git Folders\quake2-full\game\g_cmds.c(866,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\mrbar\Git Folders\quake2-full\game\g_cmds.c(873,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\mrbar\Git Folders\quake2-full\game\g_cmds.c(934,2): warning C4013: 'spawn_at' undefined; assuming extern returning int
+C:\Users\mrbar\Git Folders\quake2-full\game\g_cmds.c(1058,8): warning C4101: 'name': unreferenced local variable
+C:\Users\mrbar\Git Folders\quake2-full\game\g_cmds.c(1063,11): warning C4101: 'it_ent': unreferenced local variable
+C:\Users\mrbar\Git Folders\quake2-full\game\g_cmds.c(1062,11): warning C4101: 'give_all': unreferenced local variable
+C:\Users\mrbar\Git Folders\quake2-full\game\g_cmds.c(1066,6): warning C4189: 'playerCredits': local variable is initialized but not referenced
+C:\Users\mrbar\Git Folders\quake2-full\game\g_cmds.c(1190,7): warning C4459: declaration of 'st' hides global declaration
+      C:\Users\mrbar\Git Folders\quake2-full\game\g_local.h(463,21):
+      see declaration of 'st'
+  
+C:\Users\mrbar\Git Folders\quake2-full\game\g_cmds.c(1212,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\mrbar\Git Folders\quake2-full\game\g_cmds.c(1200,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\mrbar\Git Folders\quake2-full\game\g_cmds.c(1208,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  g_spawn.c
+C:\Users\mrbar\Git Folders\quake2-full\game\g_spawn.c(273,30): warning C4100: 'self': unreferenced formal parameter
+C:\Users\mrbar\Git Folders\quake2-full\game\g_spawn.c(293,28): warning C4042: 'classname': has bad storage class
+C:\Users\mrbar\Git Folders\quake2-full\game\g_spawn.c(293,28): warning C4028: formal parameter 1 different from declaration
+C:\Users\mrbar\Git Folders\quake2-full\game\g_spawn.c(400,20): warning C4090: '=': different 'const' qualifiers
+C:\Users\mrbar\Git Folders\quake2-full\game\g_spawn.c(372,6): warning C4189: 'maxSpawn': local variable is initialized but not referenced
+C:\Users\mrbar\Git Folders\quake2-full\game\g_spawn.c(486,5): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\mrbar\Git Folders\quake2-full\game\g_spawn.c(539,3): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\mrbar\Git Folders\quake2-full\game\g_spawn.c(649,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\mrbar\Git Folders\quake2-full\game\g_spawn.c(650,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\mrbar\Git Folders\quake2-full\game\g_spawn.c(1031,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\mrbar\Git Folders\quake2-full\game\g_spawn.c(1038,3): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\mrbar\Git Folders\quake2-full\game\g_spawn.c(1041,3): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Generating Code...
+     Creating library .\..\release\gamex86.lib and object .\..\release\gamex86.exp
+  game.vcxproj -> C:\Program Files (x86)\Steam\steamapps\common\Quake 2\ZombieMod\gamex86.dll

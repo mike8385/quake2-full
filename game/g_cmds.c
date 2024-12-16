@@ -1047,7 +1047,7 @@ void Cmd_Credits_f(edict_t* ent)
 	
 int playerCredits = ent->client->pers.credits;
 
-	gi.dprintf("%d",playerCredits);
+	gi.dprintf("%d\n",playerCredits);
 
 //}
 
@@ -1074,7 +1074,7 @@ void Cmd_Box_f(edict_t* ent)
 		gi.dprintf("%d\n", index);
 		int ranges[] = { 8, 9, 10, 11, 12, 13 };
 
-		int randomWeapon = 5.0 * random();
+		int randomWeapon = 4.0 * random();
 
 		index = ranges[randomWeapon];
 		gi.dprintf("%d\n", index);
