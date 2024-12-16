@@ -8,7 +8,9 @@ so it can run the game without bugs and crashing.
 https://steamcommunity.com/sharedfiles/filedetails/?id=2879229630
 1.) Fork the GitHub repository and download the Mod folder.
 2.) Drag the zombiehMod folder into the quake2 installation folder
-3.) Open up the zombieMod folder and open the shortcut.
+3.) Open up the zombieMod folder and open the shortcut (if theres a shortcut there).
+*If theres no shortcut, just add "+set game ZombieMod +set vid_fullscreen 0" 
+  to the end of your .exe target in properties.*
 4.) Play the game.
 
 =============================================================
@@ -29,6 +31,7 @@ Deliverables/New Features:
   -DoubleTap: Increases weapons firerate
   -Cherry: Explosion whenever you swap weapons.
 4.) Change all weapons:
-  -For the blaster I made it the raygun from COD zombies. All the other guns were essentially the same since they function the same way as in call of duty.
+  -For the blaster I made it the raygun from COD zombies. All the other guns were essentially 
+the same since they function the same way as in call of duty. I also removed the BFG from the gun pool.
 5.) Gun Upgrades:
   -DoubleTap increases fire rate, changing how fast and damaging each weapon does.
